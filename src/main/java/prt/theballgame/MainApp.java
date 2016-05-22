@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     private static MainApp instance;
+    public static boolean isPause = false;
+    public static BallPane BP;
 
     public MainApp() {
         instance = this;
@@ -30,40 +32,52 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    
+    public void initGame()
+    {
+        BP = new BallPane();
+    }
+    
     public void game() {
-        BallPane BP = new BallPane();
+        initGame();
         Scene scene = new Scene(BP, 500, 500);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if (key.getCode() == KeyCode.UP) {
+                int sign = 1;
+                BP.controllBall(sign);
+            }
+            else if (key.getCode() == KeyCode.DOWN) {
+                int sign = 2;
+                BP.controllBall(sign);
+            } 
+            else if (key.getCode() == KeyCode.LEFT) {
+                int sign = 3;
+                BP.controllBall(sign);
+            }
+            else if (key.getCode() == KeyCode.RIGHT) {
+                int sign = 4;
+                BP.controllBall(sign);
+            }
+            else if (key.getCode() == KeyCode.P) {
+                if (isPause){
+                    BP.Start(BP.animation);
+                    isPause = false;
+                }
+                else
+                {
+                    BP.Pause(BP.animation);
+                    isPause = true;
+                }
+            }else {
+                System.out.println("not usuable key used"); //->log
+                System.out.println(key.getCode());
+            }
+        });
         Stage stage = new Stage();
         stage.setTitle("TheGame");
         stage.setScene(scene);
         stage.show();
     }
-
-//    public void handler(Scene scene) {
-//        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-//            switch (key.getCode()) {
-//                case KeyCode.UP:
-//                    statements // they are executed if variable == c1
-//                    break;
-//                case c2:
-//                    statements // they are executed if variable == c2
-//                    break;
-//                case c3:
-//                case c4:
-//                    statements // they are executed if variable ==  any of the above c's
-//                    break;
-//                    . . .
-//                default:
-//                    statements // they are executed if none of the above case is satisfied
-//                    break;
-//            }
-//            if ( == ) {
-//                System.out.println("You pressed enter");
-//            }
-//        });
-//    }
-
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be

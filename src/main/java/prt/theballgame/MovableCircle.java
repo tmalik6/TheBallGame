@@ -67,8 +67,17 @@ public class MovableCircle extends Circle {
 
     }
     
-//    public void controllBall() 
-//    {
-//        
-//    }
+    public void controllBall(int sign) 
+    {
+        switch (sign) {
+            case 1:
+                dy = -dy;            
+            case 2:
+                dy = -dy; 
+            case 3:
+                dx = -dx; 
+            case 4:
+                dx = -dx;
+        }
+    }
 }
