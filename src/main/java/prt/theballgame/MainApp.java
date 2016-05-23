@@ -1,4 +1,26 @@
 package prt.theballgame;
+//CHECKSTYLE:ON
+/*
+ * #%L
+ * TheBallGame
+ * %%
+ * Copyright (C) 2016 Debreceni Egyetem, Informatikai Kar
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -12,21 +34,40 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * A program alapját képező osztály.
+ *
+ */
 public class MainApp extends Application {
 
     private static MainApp instance;
     public static boolean isPause = false;
     public static BallPane BP;
     public static Stage Mainstage = new Stage();
-
+    
+    /**
+     * 
+     * Konstruktor, amely az objektumot egy static változóba helyezi.
+     * 
+     */
     public MainApp() {
         instance = this;
     }
-
+    /**
+     * Visszadja ezt a static-us változót.
+     *
+     * @return static-us változó
+     */
     public static MainApp getInstance() {
         return instance;
     }
-
+    
+    /**
+     * Elinditja az első Scene-t.
+     *
+     * @param stage a stage amire a Scene kerül
+     *  
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
@@ -37,11 +78,17 @@ public class MainApp extends Application {
         Mainstage.show();
     }
     
-    public void initGame()
+    @SuppressWarnings("checkstyle:javadocmethod")
+    private void initGame()
     {
         BP = new BallPane();
     }
     
+    /**
+     *
+     * Elinditja az a Játék Scene-t.
+     * 
+     */
     public void game() {
         initGame();
         final Group group = new Group(createInstructions(), BP);
@@ -82,6 +129,7 @@ public class MainApp extends Application {
         Mainstage.setScene(scene);
         Mainstage.show();
     }
+    @SuppressWarnings("checkstyle:javadocmethod")
     private Label createInstructions() {
         Label instructions = new Label(
                 "Use the arrow keys to move the red circle\n"
