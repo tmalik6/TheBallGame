@@ -16,8 +16,8 @@ public class Spawner {
     public final int radius = 20;
     Random rand = new Random();
     
-    public static final int WIDTH  = 500;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH  = 750;
+    public static final int HEIGHT = 650;
 
 
     //Math.PI

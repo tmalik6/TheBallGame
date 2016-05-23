@@ -3,10 +3,13 @@ package prt.theballgame;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -14,6 +17,7 @@ public class MainApp extends Application {
     private static MainApp instance;
     public static boolean isPause = false;
     public static BallPane BP;
+    public static Stage Mainstage = new Stage();
 
     public MainApp() {
         instance = this;
@@ -28,9 +32,9 @@ public class MainApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        stage.setTitle("Main Menu");
-        stage.setScene(scene);
-        stage.show();
+        Mainstage.setTitle("Main Menu");
+        Mainstage.setScene(scene);
+        Mainstage.show();
     }
     
     public void initGame()
@@ -40,7 +44,8 @@ public class MainApp extends Application {
     
     public void game() {
         initGame();
-        Scene scene = new Scene(BP, 500, 500);
+        final Group group = new Group(createInstructions(), BP);
+        Scene scene = new Scene(group, 750, 650);
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if (key.getCode() == KeyCode.UP) {
                 int sign = 1;
@@ -73,10 +78,18 @@ public class MainApp extends Application {
                 System.out.println(key.getCode());
             }
         });
-        Stage stage = new Stage();
-        stage.setTitle("TheGame");
-        stage.setScene(scene);
-        stage.show();
+        Mainstage.setTitle("TheGame");
+        Mainstage.setScene(scene);
+        Mainstage.show();
+    }
+    private Label createInstructions() {
+        Label instructions = new Label(
+                "Use the arrow keys to move the red circle\n"
+                + "You win if you get more green circle then the computer\n"
+                + "Hit P for Pause"
+        );
+        instructions.setTextFill(Color.DARKBLUE);
+        return instructions;
     }
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
