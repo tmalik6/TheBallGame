@@ -34,6 +34,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.slf4j.LoggerFactory;
+import prt.theballgame.BallPane;
 
 /**
  * A program alapját képező osztály.

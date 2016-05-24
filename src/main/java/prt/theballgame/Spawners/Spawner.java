@@ -1,4 +1,4 @@
-package prt.theballgame;
+package prt.theballgame.Spawners;
 //CHECKSTYLE:ON
 /*
  * #%L
@@ -46,7 +46,7 @@ public class Spawner {
      * Konstruktor, mely létrehoz egy álló kör alapadait reprezentáló objektumot.
      * 
      */
-    Spawner() {
+    public Spawner() {
         int angle0 = random(3, 87);
         int quadrant = random(3);
         int angle = angle0 + quadrant * 90;

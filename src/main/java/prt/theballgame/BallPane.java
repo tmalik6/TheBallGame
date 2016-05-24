@@ -22,6 +22,8 @@ package prt.theballgame;
  * #L%
  */
 
+import prt.theballgame.Spawners.MovableCircle;
+import prt.theballgame.Spawners.Spawner;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,6 +40,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import prt.theballgame.Spawners.*;
 
 /**
  * Az Animációt és a háttérszámításokat végző osztály.

@@ -1,8 +1,8 @@
 /** 
 * Ez a csomag tartalmazza a TheBallGame megvalósítását.
-* A csomag tartalmazza a felhasználói felületet megvalósítást.
+* A csomag tartalmazza az üzleti logikát.
 */
-package prt.theballgame;
+package prt.theballgame.Spawners;
 /*
  * #%L
  * TheBallGame

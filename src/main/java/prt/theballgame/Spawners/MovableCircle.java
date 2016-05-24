@@ -1,4 +1,4 @@
-package prt.theballgame;
+package prt.theballgame.Spawners;
 //CHECKSTYLE:ON
 /*
  * #%L
@@ -22,6 +22,7 @@ package prt.theballgame;
  * #L%
  */
 
+import prt.theballgame.Spawners.Spawner;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -43,7 +44,7 @@ public class MovableCircle extends Circle {
      * @param color milyen szinű legyen a kör
      *
      */
-    MovableCircle(Color color) {
+    public MovableCircle(Color color) {
         this.setCenterX(x);
         this.setCenterY(y);
         this.setRadius(SP.radius);
