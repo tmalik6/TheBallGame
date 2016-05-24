@@ -17,5 +17,5 @@ A projekt könyvtárából a következő parancsokkal:
 
     Futtatás:
 
-    > java -jar target/prgkorny-jatek-2.0-jar-with-dependencies.jar
+    > java -jar target/TheBallGame-1.0-jar-with-dependencies.jar
 
