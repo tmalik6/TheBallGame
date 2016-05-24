@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import org.slf4j.LoggerFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -50,6 +51,7 @@ public class BallPane extends Pane {
     private final MovableCircle predator2 = new MovableCircle(Color.YELLOW);
     private boolean bounce = false;
     public static int[] eredmeny = new int[2];
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
 
     /**
      *
@@ -63,6 +65,7 @@ public class BallPane extends Pane {
         getChildren().add(predator);
         predator2.setFill(Color.YELLOW);
         getChildren().add(predator2);
+        logger.info("Körök elkészültek");
 
         setWidth(SP.WIDTH);
         setHeight(SP.HEIGHT);
@@ -96,7 +99,7 @@ public class BallPane extends Pane {
                     Move();
                 }
             } catch (IndexOutOfBoundsException | NullPointerException in) {
-                System.out.println("what"); 
+                logger.info("unexpected");
                 if(circles.isEmpty()){
                     animation.pause();
                     Move();
@@ -113,7 +116,7 @@ public class BallPane extends Pane {
                     bounce = true;
                     circles.get(i).moveBall(bounce);
                     circles.get(j).moveBall(bounce);
-                    //System.out.println(i+" "+j+" "+circles.size()); -> logba
+                    String utkoz = "Utkozos történt:" + i + ".számú kör és" +j + ".számú kör között. Maradék körök száma:" + circles.size(); 
                 }
                 bounce = false;
             }
@@ -131,8 +134,11 @@ public class BallPane extends Pane {
     @SuppressWarnings("checkstyle:javadocmethod")
     @FXML
     private void Move() {
-         System.out.println(eredmeny[0]);
-         System.out.println(eredmeny[1]);
+        String ered1 = "A játékos eredménye:" + eredmeny[0] + "";
+        String ered2 = "A gép eredménye:" + eredmeny[1] + "";
+        logger.info("Végeredmény:"); 
+        logger.info(ered1);
+        logger.info(ered2);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/EredmenyScene.fxml"));
             Scene scene = new Scene(root);
@@ -199,4 +205,5 @@ public class BallPane extends Pane {
             return 2;
         }
     }
+   
 }

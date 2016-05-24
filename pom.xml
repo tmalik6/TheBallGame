@@ -45,6 +45,17 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency> 
+        <dependency> 
+            <groupId>org.slf4j</groupId> 
+            <artifactId>slf4j-api</artifactId> 
+            <version>1.7.21</version> 
+        </dependency> 
+        <dependency> 
+            <groupId>org.slf4j</groupId> 
+            <artifactId>slf4j-jdk14</artifactId> 
+            <version>1.7.21</version> 
+            <scope>runtime</scope> 
         </dependency>
     </dependencies>
     <build>
@@ -93,14 +104,14 @@
                     <locales>hu</locales>
                 </configuration>
             </plugin>
-	   <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.5.0</version>
-				<configuration>
-					<mainClass>view.MainApp</mainClass>
-				</configuration>
-	  </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <configuration>
+                    <mainClass>view.MainApp</mainClass>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -126,23 +137,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>1.8</version>
-                <configuration>
-                    <licenseName>gpl_v3</licenseName>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>first</id>
-                        <goals>
-                            <goal>update-file-header</goal>
-                        </goals>
-                        <phase>process-sources</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.1.2</version>
@@ -150,18 +144,18 @@
                     <mainClass>${mainClass}</mainClass>
                 </configuration>
             </plugin>
-			<plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
-				<configuration>
-					<instrumentation>					
-						<excludes>
-							<exclude>prt.theballgame.EredmenySceneController.class</exclude>
-							<exclude>prt.theballgame.FXMLController.class</exclude>
-						</excludes>						
-					</instrumentation>
-				</configuration>
+                <configuration>
+                    <instrumentation>					
+                        <excludes>
+                            <exclude>prt.theballgame.EredmenySceneController.class</exclude>
+                            <exclude>prt.theballgame.FXMLController.class</exclude>
+                        </excludes>						
+                    </instrumentation>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -197,14 +191,14 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
                 <version>2.7</version>
-				<configuration>
-					<instrumentation>					
-						<excludes>
-							<exclude>prt.theballgame.EredmenySceneController.class</exclude>
-							<exclude>prt.theballgame.FXMLController.class</exclude>
-						</excludes>						
-					</instrumentation>
-				</configuration>
+                <configuration>
+                    <instrumentation>					
+                        <excludes>
+                            <exclude>prt.theballgame.EredmenySceneController.class</exclude>
+                            <exclude>prt.theballgame.FXMLController.class</exclude>
+                        </excludes>						
+                    </instrumentation>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>

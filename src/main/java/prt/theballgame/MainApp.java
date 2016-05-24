@@ -33,6 +33,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.slf4j.LoggerFactory;
 
 /**
  * A program alapját képező osztály.
@@ -44,6 +45,7 @@ public class MainApp extends Application {
     public static boolean isPause = false;
     public static BallPane BP;
     public static Stage Mainstage = new Stage();
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainApp.class);
     
     /**
      * 
@@ -121,8 +123,9 @@ public class MainApp extends Application {
                     isPause = true;
                 }
             }else {
-                System.out.println("not usuable key used"); //->log
-                System.out.println(key.getCode());
+                logger.info("not usuable key used");
+                String badkey = key.getCode() + "";
+                logger.info(badkey);
             }
         });
         Mainstage.setTitle("TheGame");
