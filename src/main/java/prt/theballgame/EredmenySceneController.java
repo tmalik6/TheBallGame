@@ -86,7 +86,7 @@ public class EredmenySceneController implements Initializable {
         // TODO
     }
     
-     @FXML
+    @FXML
     private void showeredmeny(ActionEvent event) {
         BallPane BP = new BallPane();        
         if (BP.eredmeny[0] == BP.eredmeny[1]) {

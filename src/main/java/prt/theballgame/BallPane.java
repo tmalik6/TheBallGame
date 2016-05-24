@@ -120,6 +120,7 @@ public class BallPane extends Pane {
                     circles.get(i).moveBall(bounce);
                     circles.get(j).moveBall(bounce);
                     String utkoz = "Utkozos történt:" + i + ".számú kör és" +j + ".számú kör között. Maradék körök száma:" + circles.size(); 
+                    logger.info(utkoz);
                 }
                 bounce = false;
             }
