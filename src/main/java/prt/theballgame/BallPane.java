@@ -59,7 +59,7 @@ public class BallPane extends Pane {
     /**
      *
      * Konstruktor, mely létrehoza a köröket, Pane-t és az Animációt.
-     * 
+     *
      */
     public BallPane() {
         circles = IntStream.range(0, 10).mapToObj(i -> new MovableCircle(Color.GREEN)).collect(Collectors.toList());
@@ -78,69 +78,71 @@ public class BallPane extends Pane {
         animation.play();
 
     }
-    
+
     @SuppressWarnings("checkstyle:javadocmethod")
     private void moveBall() {
         circles.forEach(x -> x.moveBall(bounce));
         predator.moveBall(bounce);
         predator2.moveBall(bounce);
         for (int i = 0; i < circles.size(); i++) {
-            bounce = false;
-            if (dist2(circles.get(i).x, circles.get(i).y, predator.x, predator.y) <= (2 * SP.radius)) {
-                getChildren().remove(circles.get(i));
-                circles.remove(i);
-                eredmeny[0] = eredmeny[0] + 1;
-            }
             try {
+                bounce = false;
+                if (dist2(circles.get(i).x, circles.get(i).y, predator.x, predator.y) <= (2 * SP.radius)) {
+                    getChildren().remove(circles.get(i));
+                    circles.remove(i);
+                    eredmeny[0] = eredmeny[0] + 1;
+                }
+
                 if (dist2(circles.get(i).x, circles.get(i).y, predator2.x, predator2.y) <= (2 * SP.radius)) {
                     getChildren().remove(circles.get(i));
                     circles.remove(i);
                     eredmeny[1] = eredmeny[1] + 1;
                 }
-                if(circles.isEmpty()){
+                if (circles.isEmpty()) {
                     animation.pause();
                     Move();
+                }
+
+                if (dist2(predator.x, predator.y, predator2.x, predator2.y) <= (2 * SP.radius)) {
+                    bounce = true;
+                    predator.moveBall(bounce);
+                    predator2.moveBall(bounce);
+                    bounce = false;
+                }
+                for (int j = i + 1; j < circles.size(); j++) {
+                    if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * SP.radius + 2)) {
+                        bounce = true;
+                        circles.get(i).moveBall(bounce);
+                        circles.get(j).moveBall(bounce);
+                        //String utkoz = "Utkozos történt:" + i + ".számú kör és" +j + ".számú kör között. Maradék körök száma:" + circles.size(); 
+                        //logger.info(utkoz); --> not vizsga any more, kivettem
+                    }
+                    bounce = false;
                 }
             } catch (IndexOutOfBoundsException | NullPointerException in) {
                 logger.info("unexpected");
-                if(circles.isEmpty()){
+                if (circles.isEmpty()) {
                     animation.pause();
                     Move();
                 }
-            }            
-            if (dist2(predator.x, predator.y, predator2.x, predator2.y) <= (2 * SP.radius)) {
-                bounce = true;
-                predator.moveBall(bounce);
-                predator2.moveBall(bounce);
-                bounce = false;
-            }
-            for (int j = i + 1; j < circles.size(); j++) {
-                if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * SP.radius + 2)) {
-                    bounce = true;
-                    circles.get(i).moveBall(bounce);
-                    circles.get(j).moveBall(bounce);
-                    String utkoz = "Utkozos történt:" + i + ".számú kör és" +j + ".számú kör között. Maradék körök száma:" + circles.size(); 
-                    logger.info(utkoz);
-                }
-                bounce = false;
             }
         }
 
     }
-    
+
     @SuppressWarnings("checkstyle:javadocmethod")
     private double dist2(double x1, double y1, double x2, double y2) {
         double t1 = x1 - x2;
         double t2 = y1 - y2;
         return Math.sqrt(t1 * t1 + t2 * t2);
     }
-    
+
     @SuppressWarnings("checkstyle:javadocmethod")
     @FXML
     private void Move() {
         String ered1 = "A játékos eredménye:" + eredmeny[0] + "";
         String ered2 = "A gép eredménye:" + eredmeny[1] + "";
-        logger.info("Végeredmény:"); 
+        logger.info("Végeredmény:");
         logger.info(ered1);
         logger.info(ered2);
         try {
@@ -154,12 +156,13 @@ public class BallPane extends Pane {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Beállítja a játékos körének új koordinátáit és vektorait.
      *
-     * @param sign melyik irányba kell mozdulni a körnek
-     *            {@code 1,2} abban az esetben, ha függőlegesen változtason irányt
-     *            {@code 3,4} abban az esetben, ha vízszintesen változtason irányt
+     * @param sign melyik irányba kell mozdulni a körnek {@code 1,2} abban az
+     * esetben, ha függőlegesen változtason irányt {@code 3,4} abban az esetben,
+     * ha vízszintesen változtason irányt
      */
     public void controllBall(int sign) {
         switch (sign) {
@@ -173,7 +176,7 @@ public class BallPane extends Pane {
                 predator.controllBall(4);
         }
     }
-    
+
     /**
      * Megállítja az Animációt.
      *
@@ -182,6 +185,7 @@ public class BallPane extends Pane {
     public void Pause(Timeline animation) {
         this.animation.pause();
     }
+
     /**
      * Újraindítja az Animációt.
      *
@@ -190,14 +194,12 @@ public class BallPane extends Pane {
     public void Start(Timeline animation) {
         this.animation.play();
     }
-    
+
     /**
      * Kiszámítja a győztest.
-     * 
-     * @return a győztes kódja
-     *            {@code 0} ha döntetlen
-     *            {@code 1} ha a játékos a győztes
-     *            {@code 2} ha a computer a győztes
+     *
+     * @return a győztes kódja {@code 0} ha döntetlen {@code 1} ha a játékos a
+     * győztes {@code 2} ha a computer a győztes
      */
     public int initdata() {
         if (eredmeny[0] == eredmeny[1]) {
@@ -209,5 +211,5 @@ public class BallPane extends Pane {
             return 2;
         }
     }
-   
+
 }

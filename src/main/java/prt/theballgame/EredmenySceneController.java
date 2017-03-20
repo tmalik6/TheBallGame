@@ -35,7 +35,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import prt.theballgame.BallPane;
+import static prt.theballgame.MainApp.BP;
 
 /**
  * FXML Controller class
@@ -88,14 +88,14 @@ public class EredmenySceneController implements Initializable {
     
     @FXML
     private void showeredmeny(ActionEvent event) {
-        BallPane BP = new BallPane();        
+        //BallPane BP = new BallPane();        
         if (BP.eredmeny[0] == BP.eredmeny[1]) {
            winnerlabel.setText("Equal  :|"); 
         }
         if (BP.eredmeny[0] > BP.eredmeny[1]) {
            winnerlabel.setText("You");
         } else {
-            winnerlabel.setText("The Computer");
+           winnerlabel.setText("The Computer");
         }
 
     }    

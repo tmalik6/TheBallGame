@@ -40,14 +40,14 @@ public class Spawner {
 
     public static final int WIDTH = 750;
     public static final int HEIGHT = 650;
-
+    
     /**
      * 
      * Konstruktor, mely létrehoz egy álló kör alapadait reprezentáló objektumot.
      * 
      */
     public Spawner() {
-        int angle0 = random(3, 87);
+        int angle0 = random(30, 70);
         int quadrant = random(3);
         int angle = angle0 + quadrant * 90;
         XWay = Math.cos(angle * Math.PI / 180);

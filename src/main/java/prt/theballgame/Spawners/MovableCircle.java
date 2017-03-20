@@ -22,7 +22,6 @@ package prt.theballgame.Spawners;
  * #L%
  */
 
-import prt.theballgame.Spawners.Spawner;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -33,7 +32,6 @@ import javafx.scene.shape.Circle;
 public class MovableCircle extends Circle {
 
     private final Spawner SP = new Spawner();
-
     public double x = SP.getPlaceX();
     public double y = SP.getPlaceY();
     public double dx = SP.getXWay(), dy = SP.getYWay();
