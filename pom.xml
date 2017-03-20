@@ -220,4 +220,5 @@
             </plugin>
         </plugins>
     </reporting>
+    <name>TheBallGamev2</name>
 </project>
