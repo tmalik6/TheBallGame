@@ -22,10 +22,16 @@ package prt.theballgame;
  * #L%
  */
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -48,7 +54,27 @@ public class FXMLController implements Initializable {
     public void startButtonAction() {
        MainApp.getInstance().game();
     }
+    
+    @FXML
+    public void optionButtonAction() {
+        Stage stage;
+        Parent root;
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OptionSchene.fxml"));
+            root = loader.load(); 
+            
+            stage = (Stage) optionButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("/styles/Styles.css");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(OptionScheneController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @FXML
     private void closeButtonAction() {
         Stage stage = (Stage) closeButton.getScene().getWindow();

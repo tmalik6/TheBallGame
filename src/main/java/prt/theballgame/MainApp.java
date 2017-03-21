@@ -42,9 +42,9 @@ import org.slf4j.LoggerFactory;
 public class MainApp extends Application {
 
     private static MainApp instance;
-    public static boolean isPause = false;
-    public static BallPane BP;
-    public static Stage Mainstage = new Stage();
+    public  static boolean isPause = false;
+    public  static BallPane BP;
+    public  static Stage Mainstage = new Stage();
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainApp.class);
     
     /**

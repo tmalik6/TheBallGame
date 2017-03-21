@@ -4,10 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prt.theballgame.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="294.0" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prt.theballgame.FXMLController">
     <children>
-	<Button fx:id="closeButton" layoutX="173.0" layoutY="107.0" onAction="#closeButtonAction" prefHeight="55.0" prefWidth="117.0" text="EXIT" />	
+	<Button fx:id="closeButton" layoutX="174.0" layoutY="191.0" onAction="#closeButtonAction" prefHeight="55.0" prefWidth="117.0" text="EXIT" />	
         <Label fx:id="label" layoutX="15.0" layoutY="33.0" minHeight="16" minWidth="69" prefHeight="32.0" prefWidth="133.0" text="The Ball Game" textAlignment="CENTER" />
-      <Button fx:id="startButton" layoutX="174.0" layoutY="37.0" mnemonicParsing="false" onAction="#startButtonAction" prefHeight="55.0" prefWidth="117.0" text="Start" />
+      <Button fx:id="startButton" layoutX="174.0" layoutY="49.0" mnemonicParsing="false" onAction="#startButtonAction" prefHeight="55.0" prefWidth="117.0" text="Start" />
+      <Button fx:id="optionButton" layoutX="174.0" layoutY="120.0" onAction="#optionButtonAction" prefHeight="55.0" prefWidth="117.0" text="Options" />
     </children>
 </AnchorPane>

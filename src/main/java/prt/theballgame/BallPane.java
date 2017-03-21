@@ -53,6 +53,7 @@ public class BallPane extends Pane {
     private final MovableCircle predator = new MovableCircle(Color.RED);
     private final MovableCircle predator2 = new MovableCircle(Color.YELLOW);
     private boolean bounce = false;
+    public  static int KorSzama = 10;
     public static int[] eredmeny = new int[2];
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
 
@@ -62,7 +63,7 @@ public class BallPane extends Pane {
      *
      */
     public BallPane() {
-        circles = IntStream.range(0, 10).mapToObj(i -> new MovableCircle(Color.GREEN)).collect(Collectors.toList());
+        circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(Color.GREEN)).collect(Collectors.toList());
         getChildren().addAll(circles);
         predator.setFill(Color.RED);
         getChildren().add(predator);
@@ -137,6 +138,14 @@ public class BallPane extends Pane {
         return Math.sqrt(t1 * t1 + t2 * t2);
     }
 
+    public static void setKorSzama(int KorSzama) {
+        BallPane.KorSzama = KorSzama;
+    }
+
+    public static int getKorSzama() {
+        return KorSzama;
+    }
+    
     @SuppressWarnings("checkstyle:javadocmethod")
     @FXML
     private void Move() {
