@@ -50,12 +50,15 @@ public class BallPane extends Pane {
     public static Timeline animation;
     private final List<MovableCircle> circles;
     Spawner SP = new Spawner();
-    private final MovableCircle predator = new MovableCircle(Color.RED);
-    private final MovableCircle predator2 = new MovableCircle(Color.YELLOW);
+    public  static  Color PredatorColor = Color.RED;
+    public  static  Color PredatorColor2 = Color.YELLOW;
+    public  static  Color CirclesColor = Color.GREEN;
+    private static  MovableCircle predator;
+    private static  MovableCircle predator2;
     private boolean bounce = false;
-    public  static int KorSzama = 10;
-    public static int[] eredmeny = new int[2];
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
+    public  static  int KorSzama = 10;
+    public  static  int[] eredmeny = new int[2];
+    private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
 
     /**
      *
@@ -63,7 +66,9 @@ public class BallPane extends Pane {
      *
      */
     public BallPane() {
-        circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(Color.GREEN)).collect(Collectors.toList());
+        predator = new MovableCircle(PredatorColor);
+        predator2 = new MovableCircle(PredatorColor2);
+        circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(CirclesColor)).collect(Collectors.toList());
         getChildren().addAll(circles);
         predator.setFill(Color.RED);
         getChildren().add(predator);
@@ -141,9 +146,26 @@ public class BallPane extends Pane {
     public static void setKorSzama(int KorSzama) {
         BallPane.KorSzama = KorSzama;
     }
-
+    public static void setPredatorColor(Color PredatorColor) {
+        BallPane.PredatorColor = PredatorColor;
+    }
+    public static void setPredatorColor2(Color PredatorColor2) {
+        BallPane.PredatorColor2 = PredatorColor2;
+    }
+    public static void setCirclesColor(Color CirclesColor) {
+        BallPane.CirclesColor = CirclesColor;
+    }
     public static int getKorSzama() {
         return KorSzama;
+    }
+    public static Color getPredatorColor() {
+        return PredatorColor;
+    }
+    public static Color getPredatorColor2() {
+        return PredatorColor2;
+    }
+    public static Color getCirclesColor() {
+        return CirclesColor;
     }
     
     @SuppressWarnings("checkstyle:javadocmethod")
