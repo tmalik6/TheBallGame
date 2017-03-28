@@ -98,19 +98,35 @@ public class MainApp extends Application {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if (key.getCode() == KeyCode.UP) {
                 int sign = 1;
-                BP.controllBall(sign);
+                BP.controllBall(sign,BP.predator);
             }
             else if (key.getCode() == KeyCode.DOWN) {
                 int sign = 2;
-                BP.controllBall(sign);
+                BP.controllBall(sign,BP.predator);
             } 
             else if (key.getCode() == KeyCode.LEFT) {
                 int sign = 3;
-                BP.controllBall(sign);
+                BP.controllBall(sign,BP.predator);
             }
             else if (key.getCode() == KeyCode.RIGHT) {
                 int sign = 4;
-                BP.controllBall(sign);
+                BP.controllBall(sign,BP.predator);
+            }
+            else if (key.getCode() == KeyCode.W) {
+                int sign = 1;
+                BP.controllBall(sign,BP.predator2);
+            }
+            else if (key.getCode() == KeyCode.S) {
+                int sign = 2;
+                BP.controllBall(sign,BP.predator2);
+            } 
+            else if (key.getCode() == KeyCode.A) {
+                int sign = 3;
+                BP.controllBall(sign,BP.predator2);
+            }
+            else if (key.getCode() == KeyCode.D) {
+                int sign = 4;
+                BP.controllBall(sign,BP.predator2);
             }
             else if (key.getCode() == KeyCode.P) {
                 if (isPause){

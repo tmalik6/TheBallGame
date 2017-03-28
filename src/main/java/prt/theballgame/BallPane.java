@@ -53,8 +53,8 @@ public class BallPane extends Pane {
     public  static  Color PredatorColor = Color.RED;
     public  static  Color PredatorColor2 = Color.YELLOW;
     public  static  Color CirclesColor = Color.GREEN;
-    private static  MovableCircle predator;
-    private static  MovableCircle predator2;
+    public  static  MovableCircle predator;
+    public  static  MovableCircle predator2;
     private boolean bounce = false;
     public  static  int KorSzama = 10;
     public  static  int[] eredmeny = new int[2];
@@ -70,9 +70,7 @@ public class BallPane extends Pane {
         predator2 = new MovableCircle(PredatorColor2);
         circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(CirclesColor)).collect(Collectors.toList());
         getChildren().addAll(circles);
-        predator.setFill(Color.RED);
         getChildren().add(predator);
-        predator2.setFill(Color.YELLOW);
         getChildren().add(predator2);
         logger.info("Körök elkészültek");
 
@@ -189,22 +187,23 @@ public class BallPane extends Pane {
     }
 
     /**
-     * Beállítja a játékos körének új koordinátáit és vektorait.
+     * Beállítja a játékos/ok körének új koordinátáit és vektorait.
      *
      * @param sign melyik irányba kell mozdulni a körnek {@code 1,2} abban az
      * esetben, ha függőlegesen változtason irányt {@code 3,4} abban az esetben,
      * ha vízszintesen változtason irányt
+     * @param labda amelyiket mozgatni szeretnénk
      */
-    public void controllBall(int sign) {
+    public void controllBall(int sign, MovableCircle labda) {
         switch (sign) {
             case 1:
-                predator.controllBall(1);
+                labda.controllBall(1);
             case 2:
-                predator.controllBall(2);
+                labda.controllBall(2);
             case 3:
-                predator.controllBall(3);
+                labda.controllBall(3);
             case 4:
-                predator.controllBall(4);
+                labda.controllBall(4);
         }
     }
 

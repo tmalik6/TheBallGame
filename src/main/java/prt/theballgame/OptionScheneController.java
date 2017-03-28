@@ -6,10 +6,7 @@ package prt.theballgame;
  * and open the template in the editor.
  */
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -35,6 +33,12 @@ import static prt.theballgame.MainApp.BP;
 public class OptionScheneController implements Initializable {
 
     private String KorSzamChange;
+    
+    private Color ColorChange;
+    
+    private String Valasztott;
+    
+    private boolean mehet = true;
 
     @FXML
     private Label KorSzamLabel;
@@ -50,6 +54,12 @@ public class OptionScheneController implements Initializable {
 
     @FXML
     private Label HibaLabel;
+    
+    @FXML
+    private RadioButton SingleRadio;
+    
+    @FXML
+    private RadioButton MultiRadio;
 
     @FXML
     private javafx.scene.control.Button SaveButton;
@@ -73,18 +83,37 @@ public class OptionScheneController implements Initializable {
 
     @FXML
     private void SaveButtonAction() {
-        if (!KorSzamTF.getText().isEmpty()) {
+        if (!KorSzamTF.getText().isEmpty() && mehet) {
             KorSzamChange = KorSzamTF.getText();
             try {
                 int foo = Integer.parseInt(KorSzamChange);
                 BP.setKorSzama(foo);
             } catch (NumberFormatException ex) {
                 Logger.getLogger(OptionScheneController.class.getName()).log(Level.SEVERE, null, ex);
-                HibaLabel.setText("Ez nem szám");
+                HibaLabel.setText("Ez nem szám!");
+                mehet = false;
             }
-            HibaLabel.setText("Mentve");
             KorSzamLabel.setText(BP.getKorSzama() + "");
         }
+        //predator
+        if(mehet){
+        Valasztott = (String) PredatorColor.getValue();
+        ColorChange = Color.valueOf(Valasztott);
+        PredatorSzinLabel.setText(getColourName(ColorChange) + "");
+        BallPane.setPredatorColor(ColorChange);
+        //predator2
+        Valasztott = (String) Predator2Color.getValue();
+        ColorChange = Color.valueOf(Valasztott);
+        Predator2SzinLabel.setText(getColourName(ColorChange) + "");
+        BallPane.setPredatorColor2(ColorChange);
+        //circles
+        Valasztott = (String) CirclesColor.getValue();
+        ColorChange = Color.valueOf(Valasztott);
+        CirclesSzinLabel.setText(getColourName(ColorChange) + "");
+        BallPane.setCirclesColor(ColorChange);
+        HibaLabel.setText("Mentve");
+        }
+        mehet = true;
     }
 
     @FXML
@@ -120,7 +149,7 @@ public class OptionScheneController implements Initializable {
         CirclesColor.setItems(datos);
         PredatorColor.getSelectionModel().select(0);
         Predator2Color.getSelectionModel().select(2);
-        CirclesColor.getSelectionModel().select(3);
+        CirclesColor.getSelectionModel().select(3);        
     }
 
     public static String getColourName(Color becolor) {
@@ -158,7 +187,6 @@ public class OptionScheneController implements Initializable {
         if (piros == Color.ORANGE.getRed() && zud == Color.ORANGE.getGreen() && kek == Color.ORANGE.getBlue()) {
             return "ORANGE";
         }
-
         return null;
     }
 }
