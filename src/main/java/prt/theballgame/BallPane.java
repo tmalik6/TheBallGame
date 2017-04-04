@@ -23,7 +23,6 @@ package prt.theballgame;
  */
 
 import prt.theballgame.Spawners.MovableCircle;
-import prt.theballgame.Spawners.Spawner;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,26 +39,24 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import prt.theballgame.Spawners.*;
 
 /**
  * Az Animációt és a háttérszámításokat végző osztály.
  */
 public class BallPane extends Pane {
 
-    public static Timeline animation;
-    private final List<MovableCircle> circles;
-    Spawner SP = new Spawner();
-    public  static  Color PredatorColor = Color.RED;
-    public  static  Color PredatorColor2 = Color.YELLOW;
-    public  static  Color CirclesColor = Color.GREEN;
-    public  static  MovableCircle predator;
-    public  static  MovableCircle predator2;
-    private boolean bounce = false;
-    public  static  int KorSzama = 10;
-    public  static  int[] eredmeny = new int[2];
-    private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
-    public  static  boolean multiplayer = false;
+    public   static  Timeline animation;    
+    private  final   int[] eredmeny = new int[2];
+    public   final   List<MovableCircle> circles;
+    private  static  Color PredatorColor;
+    private  static  Color PredatorColor2;
+    private  static  Color CirclesColor;
+    public   static  MovableCircle predator;
+    public   static  MovableCircle predator2;
+    private  boolean bounce = false;
+    private  static  int KorSzama;
+    private  final   org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
+    private  static  int radius;
 
     /**
      *
@@ -67,6 +64,11 @@ public class BallPane extends Pane {
      *
      */
     public BallPane() {
+        KorSzama = BallSettings.getKorSzama();
+        radius = BallSettings.getRadius();
+        PredatorColor = BallSettings.getPredatorColor();
+        PredatorColor2 = BallSettings.getPredatorColor2();
+        CirclesColor = BallSettings.getCirclesColor();
         predator = new MovableCircle(PredatorColor);
         predator2 = new MovableCircle(PredatorColor2);
         circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(CirclesColor)).collect(Collectors.toList());
@@ -75,8 +77,8 @@ public class BallPane extends Pane {
         getChildren().add(predator2);
         logger.info("Körök elkészültek");
 
-        setWidth(SP.WIDTH);
-        setHeight(SP.HEIGHT);
+        //setWidth(SP.WIDTH);
+        //setHeight(SP.HEIGHT);
 
         animation = new Timeline(new KeyFrame(Duration.millis(7), e -> moveBall()));
         animation.setCycleCount(Timeline.INDEFINITE);
@@ -92,13 +94,13 @@ public class BallPane extends Pane {
         for (int i = 0; i < circles.size(); i++) {
             try {
                 bounce = false;
-                if (dist2(circles.get(i).x, circles.get(i).y, predator.x, predator.y) <= (2 * SP.radius)) {
+                if (dist2(circles.get(i).x, circles.get(i).y, predator.x, predator.y) <= (2 * radius)) {
                     getChildren().remove(circles.get(i));
                     circles.remove(i);
                     eredmeny[0] = eredmeny[0] + 1;
                 }
 
-                if (dist2(circles.get(i).x, circles.get(i).y, predator2.x, predator2.y) <= (2 * SP.radius)) {
+                if (dist2(circles.get(i).x, circles.get(i).y, predator2.x, predator2.y) <= (2 * radius)) {
                     getChildren().remove(circles.get(i));
                     circles.remove(i);
                     eredmeny[1] = eredmeny[1] + 1;
@@ -108,14 +110,14 @@ public class BallPane extends Pane {
                     Move();
                 }
 
-                if (dist2(predator.x, predator.y, predator2.x, predator2.y) <= (2 * SP.radius)) {
+                if (dist2(predator.x, predator.y, predator2.x, predator2.y) <= (2 * radius)) {
                     bounce = true;
                     predator.moveBall(bounce);
                     predator2.moveBall(bounce);
                     bounce = false;
                 }
                 for (int j = i + 1; j < circles.size(); j++) {
-                    if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * SP.radius + 2)) {
+                    if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * radius + 2)) {
                         bounce = true;
                         circles.get(i).moveBall(bounce);
                         circles.get(j).moveBall(bounce);
@@ -141,32 +143,7 @@ public class BallPane extends Pane {
         double t2 = y1 - y2;
         return Math.sqrt(t1 * t1 + t2 * t2);
     }
-
-    public static void setKorSzama(int KorSzama) {
-        BallPane.KorSzama = KorSzama;
-    }
-    public static void setPredatorColor(Color PredatorColor) {
-        BallPane.PredatorColor = PredatorColor;
-    }
-    public static void setPredatorColor2(Color PredatorColor2) {
-        BallPane.PredatorColor2 = PredatorColor2;
-    }
-    public static void setCirclesColor(Color CirclesColor) {
-        BallPane.CirclesColor = CirclesColor;
-    }
-    public static int getKorSzama() {
-        return KorSzama;
-    }
-    public static Color getPredatorColor() {
-        return PredatorColor;
-    }
-    public static Color getPredatorColor2() {
-        return PredatorColor2;
-    }
-    public static Color getCirclesColor() {
-        return CirclesColor;
-    }
-    
+      
     @SuppressWarnings("checkstyle:javadocmethod")
     @FXML
     private void Move() {
@@ -175,6 +152,7 @@ public class BallPane extends Pane {
         logger.info("Végeredmény:");
         logger.info(ered1);
         logger.info(ered2);
+        BallSettings.setEredmeny(eredmeny);
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/EredmenyScene.fxml"));
             Scene scene = new Scene(root);
@@ -208,39 +186,30 @@ public class BallPane extends Pane {
         }
     }
 
+    public void instaend()
+    {
+        for (int i = 0; i < circles.size(); i++) {
+            circles.remove(i);
+            getChildren().remove(i);
+        }
+        if (circles.isEmpty()){
+            animation.pause();
+            Move();
+        }
+    }
     /**
      * Megállítja az Animációt.
      *
-     * @param animation Maga az Animáció
      */
-    public void Pause(Timeline animation) {
-        this.animation.pause();
+    public void Pause() {
+        animation.pause();
     }
 
     /**
      * Újraindítja az Animációt.
      *
-     * @param animation Maga az Animáció
      */
-    public void Start(Timeline animation) {
-        this.animation.play();
-    }
-
-    /**
-     * Kiszámítja a győztest.
-     *
-     * @return a győztes kódja {@code 0} ha döntetlen {@code 1} ha a játékos a
-     * győztes {@code 2} ha a computer a győztes
-     */
-    public int initdata() {
-        if (eredmeny[0] == eredmeny[1]) {
-            return 0;
-        }
-        if (eredmeny[0] > eredmeny[1]) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
-
+    public void Start() {
+        animation.play();
+    }  
 }

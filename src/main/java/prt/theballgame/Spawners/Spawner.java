@@ -23,6 +23,7 @@ package prt.theballgame.Spawners;
  */
 
 import java.util.Random;
+import prt.theballgame.BallSettings;
 
 /**
  * A kör alapadait reprezentáló osztály.
@@ -35,11 +36,11 @@ public class Spawner {
     private static int speed;
     private static double XWay;
     private static double YWay;
-    public final int radius = 20;
     Random rand = new Random();
 
     public static final int WIDTH = 750;
     public static final int HEIGHT = 650;
+    public static int radius = BallSettings.radius;
     
     /**
      * 

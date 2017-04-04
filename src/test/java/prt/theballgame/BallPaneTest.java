@@ -22,12 +22,12 @@ public class BallPaneTest {
     public BallPaneTest() {
     }
     
-    @Test
+    /*@Test
     public void testInitdata() {
         BallPane instance = new BallPane();
         int expResult = 0;
         int result = instance.initdata();
         assertEquals(expResult, result);
-    }
+    }*/
     
 }

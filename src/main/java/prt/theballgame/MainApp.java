@@ -68,6 +68,7 @@ public class MainApp extends Application {
      * Elinditja az első Scene-t.
      *
      * @param stage a stage amire a Scene kerül
+     * @throws java.lang.Exception
      *  
      */
     @Override
@@ -112,30 +113,32 @@ public class MainApp extends Application {
                 int sign = 4;
                 BP.controllBall(sign,BP.predator);
             }
-            else if (key.getCode() == KeyCode.W && BP.multiplayer) {
+            else if (key.getCode() == KeyCode.W && BallSettings.multiplayer) {
                 int sign = 1;
                 BP.controllBall(sign,BP.predator2);
             }
-            else if (key.getCode() == KeyCode.S && BP.multiplayer) {
+            else if (key.getCode() == KeyCode.S && BallSettings.multiplayer) {
                 int sign = 2;
                 BP.controllBall(sign,BP.predator2);
             } 
-            else if (key.getCode() == KeyCode.A && BP.multiplayer) {
+            else if (key.getCode() == KeyCode.A && BallSettings.multiplayer) {
                 int sign = 3;
                 BP.controllBall(sign,BP.predator2);
             }
-            else if (key.getCode() == KeyCode.D && BP.multiplayer) {
+            else if (key.getCode() == KeyCode.D && BallSettings.multiplayer) {
                 int sign = 4;
                 BP.controllBall(sign,BP.predator2);
-            }
+            }else if (key.getCode() == KeyCode.Z){
+                BP.instaend();
+                        }
             else if (key.getCode() == KeyCode.P) {
                 if (isPause){
-                    BP.Start(BP.animation);
+                    BP.Start();
                     isPause = false;
                 }
                 else
                 {
-                    BP.Pause(BP.animation);
+                    BP.Pause();
                     isPause = true;
                 }
             }else {
@@ -146,6 +149,7 @@ public class MainApp extends Application {
         });
         Mainstage.setTitle("TheGame");
         Mainstage.setScene(scene);
+        //Mainstage.setFullScreen(true);
         Mainstage.show();
     }
     @SuppressWarnings("checkstyle:javadocmethod")

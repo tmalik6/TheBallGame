@@ -24,6 +24,7 @@ package prt.theballgame.Spawners;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import prt.theballgame.BallSettings;
 
 /**
  * A mozgatást végző osztály.
@@ -31,11 +32,11 @@ import javafx.scene.shape.Circle;
  */
 public class MovableCircle extends Circle {
 
-    private final Spawner SP = new Spawner();
-    public double x = SP.getPlaceX();
-    public double y = SP.getPlaceY();
-    public double dx = SP.getXWay(), dy = SP.getYWay();
-
+    private final  Spawner SP = new Spawner();
+    public  double x = Spawner.getPlaceX();
+    public  double y = Spawner.getPlaceY();
+    public  double dx = SP.getXWay(), dy = SP.getYWay();
+    private final int radius = BallSettings.getRadius();
     /**
      *
      * Konstruktor, mely létrehoz egy mozgatható kör-t reprezentáló objektumot.
@@ -45,14 +46,14 @@ public class MovableCircle extends Circle {
     public MovableCircle(Color color) {
         this.setCenterX(x);
         this.setCenterY(y);
-        this.setRadius(SP.radius);
+        this.setRadius(radius);
         this.setFill(color);
         CheckDx(dx);
         CheckDy(dy);
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
-    private final void CheckDx(double newDx) {
+    private void CheckDx(double newDx) {
         while (newDx < -10 || newDx > 10) {
             newDx = dx;
         }
@@ -60,7 +61,7 @@ public class MovableCircle extends Circle {
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
-    private final void CheckDy(double newDy) {
+    private void CheckDy(double newDy) {
         while (newDy < -10 || newDy > 10) {
             newDy = dy;
         }
@@ -80,11 +81,11 @@ public class MovableCircle extends Circle {
             dx = -dx;
             dy = -dy;
         } else {
-            if (x < SP.radius || x > SP.WIDTH - SP.radius) {
+            if (x < radius || x > Spawner.WIDTH - radius) {
                 dx *= -1;
             }
 
-            if (y < SP.radius || y > SP.HEIGHT - SP.radius) {
+            if (y < radius || y > Spawner.HEIGHT - radius) {
                 dy *= -1;
             }
         }
