@@ -21,6 +21,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import static prt.theballgame.MainApp.BP;
@@ -59,7 +60,7 @@ public class OptionScheneController implements Initializable {
     private RadioButton SingleRadio;
     
     @FXML
-    private RadioButton MultiRadio;
+    private RadioButton MultiRadio;  
 
     @FXML
     private javafx.scene.control.Button SaveButton;
@@ -76,10 +77,12 @@ public class OptionScheneController implements Initializable {
     @FXML
     private ChoiceBox Predator2Color;
     
-    private ObservableList<String> datos = FXCollections.observableArrayList("RED", "BLUE", "YELLOW", "GREEN", "BLACK","BROWN", "GOLD","VIOLET","ORANGE","CHOCOLATE");
+    private final ObservableList<String> datos = FXCollections.observableArrayList("RED", "BLUE", "YELLOW", "GREEN", "BLACK","BROWN", "GOLD","VIOLET","ORANGE","CHOCOLATE");
     
     @FXML
     private ChoiceBox CirclesColor;
+    
+    private final ToggleGroup group = new ToggleGroup();
 
     @FXML
     private void SaveButtonAction() {
@@ -94,6 +97,12 @@ public class OptionScheneController implements Initializable {
                 mehet = false;
             }
             KorSzamLabel.setText(BP.getKorSzama() + "");
+        }        
+        if(group.getSelectedToggle().getUserData().toString().equals("Multi")){
+            BP.multiplayer = true;
+        }
+        else{
+            BP.multiplayer = false;
         }
         //predator
         if(mehet){
@@ -149,7 +158,12 @@ public class OptionScheneController implements Initializable {
         CirclesColor.setItems(datos);
         PredatorColor.getSelectionModel().select(0);
         Predator2Color.getSelectionModel().select(2);
-        CirclesColor.getSelectionModel().select(3);        
+        CirclesColor.getSelectionModel().select(3);  
+        SingleRadio.setToggleGroup(group);
+        MultiRadio.setToggleGroup(group);
+        SingleRadio.setSelected(true);
+        SingleRadio.setUserData("Single");
+        MultiRadio.setUserData("Multi");
     }
 
     public static String getColourName(Color becolor) {

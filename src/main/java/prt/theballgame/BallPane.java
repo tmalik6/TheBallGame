@@ -59,6 +59,7 @@ public class BallPane extends Pane {
     public  static  int KorSzama = 10;
     public  static  int[] eredmeny = new int[2];
     private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
+    public  static  boolean multiplayer = false;
 
     /**
      *

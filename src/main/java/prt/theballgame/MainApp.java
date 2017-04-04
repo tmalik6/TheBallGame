@@ -112,19 +112,19 @@ public class MainApp extends Application {
                 int sign = 4;
                 BP.controllBall(sign,BP.predator);
             }
-            else if (key.getCode() == KeyCode.W) {
+            else if (key.getCode() == KeyCode.W && BP.multiplayer) {
                 int sign = 1;
                 BP.controllBall(sign,BP.predator2);
             }
-            else if (key.getCode() == KeyCode.S) {
+            else if (key.getCode() == KeyCode.S && BP.multiplayer) {
                 int sign = 2;
                 BP.controllBall(sign,BP.predator2);
             } 
-            else if (key.getCode() == KeyCode.A) {
+            else if (key.getCode() == KeyCode.A && BP.multiplayer) {
                 int sign = 3;
                 BP.controllBall(sign,BP.predator2);
             }
-            else if (key.getCode() == KeyCode.D) {
+            else if (key.getCode() == KeyCode.D && BP.multiplayer) {
                 int sign = 4;
                 BP.controllBall(sign,BP.predator2);
             }
