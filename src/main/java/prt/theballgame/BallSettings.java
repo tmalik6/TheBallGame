@@ -1,9 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package prt.theballgame;
+/*
+ * #%L
+ * TheBallGame
+ * %%
+ * Copyright (C) 2016 Debreceni Egyetem, Informatikai Kar
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +31,7 @@ import javafx.scene.paint.Color;
  */
 public class BallSettings {
     public  static  ObservableList<String> datos = FXCollections.observableArrayList("RED", "BLUE", "YELLOW", "GREEN", "BLACK","BROWN", "GOLD","VIOLET","ORANGE","CHOCOLATE");
+    public  static  ObservableList<String> igaz_hamis = FXCollections.observableArrayList("true", "false");
     public  static  Color PredatorColor = Color.RED;
     public  static  Color PredatorColor2 = Color.YELLOW;
     public  static  Color CirclesColor = Color.GREEN;
@@ -22,7 +39,10 @@ public class BallSettings {
     public  static  boolean multiplayer = false;
     public  static  int radius = 20;
     public  static  int[] eredmeny = new int[2];
-    
+    public  static  boolean fulldisplay = false;
+    public  static  int Width = 750;//MainApp.Width;
+    public  static  int Height = 650;//MainApp.Height;
+
     public static void setKorSzama(int KorSzama) {
         BallSettings.KorSzama = KorSzama;
     }
@@ -71,6 +91,12 @@ public class BallSettings {
     }
     public static void setEredmeny(int[] eredmeny) {
         BallSettings.eredmeny = eredmeny;
+    }
+        public static void setFulldisplay(boolean fulldisplay) {
+        BallSettings.fulldisplay = fulldisplay;
+    }
+    public static boolean isFulldisplay() {
+        return fulldisplay;
     }
     public static String getColourName(Color becolor) {
         double piros = becolor.getRed();

@@ -49,6 +49,9 @@ public class OptionScheneController implements Initializable {
 
     @FXML
     private Label CirclesSzinLabel;
+    
+    @FXML
+    private Label DisplayLabel;
 
     @FXML
     private Label HibaLabel;
@@ -76,6 +79,9 @@ public class OptionScheneController implements Initializable {
     
     @FXML
     private ChoiceBox CirclesColor;
+    
+    @FXML
+    private ChoiceBox DisplayChoice;
     
     private final ToggleGroup group = new ToggleGroup();
 
@@ -115,6 +121,11 @@ public class OptionScheneController implements Initializable {
         ColorChange = Color.valueOf(Valasztott);
         CirclesSzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
         BallSettings.setCirclesColor(ColorChange);
+        //display 
+        Valasztott = (String) DisplayChoice.getValue();
+        Boolean b = Boolean.valueOf(Valasztott);
+        BallSettings.setFulldisplay(b);        
+        DisplayLabel.setText(BallSettings.isFulldisplay()+ "");
         HibaLabel.setText("Mentve");        
         }
         mehet = true;
@@ -162,5 +173,8 @@ public class OptionScheneController implements Initializable {
         else MultiRadio.setSelected(true);
         SingleRadio.setUserData("Single");
         MultiRadio.setUserData("Multi");
+        DisplayLabel.setText(BallSettings.isFulldisplay()+ "");
+        DisplayChoice.setItems(BallSettings.igaz_hamis);
+        DisplayChoice.getSelectionModel().select(1);
     }   
 }

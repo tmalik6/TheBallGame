@@ -38,8 +38,8 @@ public class Spawner {
     private static double YWay;
     Random rand = new Random();
 
-    public static final int WIDTH = 750;
-    public static final int HEIGHT = 650;
+    public static final int WIDTH = BallSettings.Width;
+    public static final int HEIGHT = BallSettings.Height;
     public static int radius = BallSettings.radius;
     
     /**

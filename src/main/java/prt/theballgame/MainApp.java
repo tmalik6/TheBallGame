@@ -25,6 +25,7 @@ package prt.theballgame;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.slf4j.LoggerFactory;
 
@@ -45,16 +47,19 @@ public class MainApp extends Application {
     public  static boolean isPause = false;
     public  static BallPane BP;
     public  static Stage Mainstage = new Stage();
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainApp.class);
-    
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainApp.class);    
+    public  static int Width;
+    public  static int Height;
+
     /**
-     * 
+     *
      * Konstruktor, amely az objektumot egy static változóba helyezi.
-     * 
+     *
      */
     public MainApp() {
         instance = this;
     }
+
     /**
      * Visszadja ezt a static-us változót.
      *
@@ -63,13 +68,13 @@ public class MainApp extends Application {
     public static MainApp getInstance() {
         return instance;
     }
-    
+
     /**
      * Elinditja az első Scene-t.
      *
      * @param stage a stage amire a Scene kerül
      * @throws java.lang.Exception
-     *  
+     *
      */
     @Override
     public void start(Stage stage) throws Exception {
@@ -80,78 +85,77 @@ public class MainApp extends Application {
         Mainstage.setScene(scene);
         Mainstage.show();
     }
-    
+
     @SuppressWarnings("checkstyle:javadocmethod")
-    private void initGame()
-    {
+    private void initGame() {
         BP = new BallPane();
     }
-    
+
     /**
      *
      * Elinditja az a Játék Scene-t.
-     * 
+     *
      */
     public void game() {
         initGame();
         final Group group = new Group(createInstructions(), BP);
-        Scene scene = new Scene(group, 750, 650);
+        Scene scene = null;
+        if (!BallSettings.isFulldisplay()) {
+            scene = new Scene(group, 750, 650);
+        } else {
+            scene = new Scene(group);
+        }
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if (key.getCode() == KeyCode.UP) {
                 int sign = 1;
-                BP.controllBall(sign,BP.predator);
-            }
-            else if (key.getCode() == KeyCode.DOWN) {
+                BP.controllBall(sign, BallPane.predator);
+            } else if (key.getCode() == KeyCode.DOWN) {
                 int sign = 2;
-                BP.controllBall(sign,BP.predator);
-            } 
-            else if (key.getCode() == KeyCode.LEFT) {
+                BP.controllBall(sign, BallPane.predator);
+            } else if (key.getCode() == KeyCode.LEFT) {
                 int sign = 3;
-                BP.controllBall(sign,BP.predator);
-            }
-            else if (key.getCode() == KeyCode.RIGHT) {
+                BP.controllBall(sign, BallPane.predator);
+            } else if (key.getCode() == KeyCode.RIGHT) {
                 int sign = 4;
-                BP.controllBall(sign,BP.predator);
-            }
-            else if (key.getCode() == KeyCode.W && BallSettings.multiplayer) {
+                BP.controllBall(sign, BallPane.predator);
+            } else if (key.getCode() == KeyCode.W && BallSettings.multiplayer) {
                 int sign = 1;
-                BP.controllBall(sign,BP.predator2);
-            }
-            else if (key.getCode() == KeyCode.S && BallSettings.multiplayer) {
+                BP.controllBall(sign, BallPane.predator2);
+            } else if (key.getCode() == KeyCode.S && BallSettings.multiplayer) {
                 int sign = 2;
-                BP.controllBall(sign,BP.predator2);
-            } 
-            else if (key.getCode() == KeyCode.A && BallSettings.multiplayer) {
+                BP.controllBall(sign, BallPane.predator2);
+            } else if (key.getCode() == KeyCode.A && BallSettings.multiplayer) {
                 int sign = 3;
-                BP.controllBall(sign,BP.predator2);
-            }
-            else if (key.getCode() == KeyCode.D && BallSettings.multiplayer) {
+                BP.controllBall(sign, BallPane.predator2);
+            } else if (key.getCode() == KeyCode.D && BallSettings.multiplayer) {
                 int sign = 4;
-                BP.controllBall(sign,BP.predator2);
-            }else if (key.getCode() == KeyCode.Z){
+                BP.controllBall(sign, BallPane.predator2);
+            } else if (key.getCode() == KeyCode.Z) {
                 BP.instaend();
-                        }
-            else if (key.getCode() == KeyCode.P) {
-                if (isPause){
+            } else if (key.getCode() == KeyCode.P) {
+                if (isPause) {
                     BP.Start();
                     isPause = false;
-                }
-                else
-                {
+                } else {
                     BP.Pause();
                     isPause = true;
                 }
-            }else {
+            } else {
                 logger.info("not usuable key used");
                 String badkey = key.getCode() + "";
                 logger.info(badkey);
             }
         });
         Mainstage.setTitle("TheGame");
-        Mainstage.setScene(scene);
-        //Mainstage.setFullScreen(true);
+        Mainstage.setScene(scene);        
+        if(BallSettings.isFulldisplay()){Mainstage.setFullScreen(true);}
         Mainstage.show();
+        Width = (int) Mainstage.getWidth();
+        Height = (int) Mainstage.getHeight();
+        logger.info(Width  + "");
+        logger.info(Height + "");        
     }
+
     @SuppressWarnings("checkstyle:javadocmethod")
     private Label createInstructions() {
         Label instructions = new Label(
@@ -162,6 +166,7 @@ public class MainApp extends Application {
         instructions.setTextFill(Color.DARKBLUE);
         return instructions;
     }
+
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
