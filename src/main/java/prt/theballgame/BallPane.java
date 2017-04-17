@@ -39,6 +39,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import prt.theballgame.Spawners.Spawner;
 
 /**
  * Az Animációt és a háttérszámításokat végző osztály.
@@ -47,23 +48,23 @@ public class BallPane extends Pane {
 
     public   static  Timeline animation;    
     private  final   int[] eredmeny = new int[2];
-    public   final   List<MovableCircle> circles;
     private  static  Color PredatorColor;
     private  static  Color PredatorColor2;
     private  static  Color CirclesColor;
-    public   static  MovableCircle predator;
-    public   static  MovableCircle predator2;
     private  boolean bounce = false;
     private  static  int KorSzama;
     private  final   org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
-    private  static  int radius;
-
+    private  static  int radius;    
+    public   static   MovableCircle predator;
+    public   static   MovableCircle predator2;
+    public            List<MovableCircle> circles;
     /**
      *
      * Konstruktor, mely létrehoza a köröket, Pane-t és az Animációt.
      *
      */
     public BallPane() {
+        Spawner.checker();
         KorSzama = BallSettings.getKorSzama();
         radius = BallSettings.getRadius();
         PredatorColor = BallSettings.getPredatorColor();
@@ -158,7 +159,8 @@ public class BallPane extends Pane {
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");
             MainApp.Mainstage.setScene(scene);
-            MainApp.Mainstage.show();
+            MainApp.Mainstage.setFullScreen(false);
+            MainApp.Mainstage.show();            
 
         } catch (IOException ex) {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);

@@ -25,7 +25,6 @@ package prt.theballgame;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,7 +32,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +45,7 @@ public class MainApp extends Application {
     public  static boolean isPause = false;
     public  static BallPane BP;
     public  static Stage Mainstage = new Stage();
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainApp.class);    
-    public  static int Width;
-    public  static int Height;
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MainApp.class); 
 
     /**
      *
@@ -149,11 +145,7 @@ public class MainApp extends Application {
         Mainstage.setTitle("TheGame");
         Mainstage.setScene(scene);        
         if(BallSettings.isFulldisplay()){Mainstage.setFullScreen(true);}
-        Mainstage.show();
-        Width = (int) Mainstage.getWidth();
-        Height = (int) Mainstage.getHeight();
-        logger.info(Width  + "");
-        logger.info(Height + "");        
+        Mainstage.show();        
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")

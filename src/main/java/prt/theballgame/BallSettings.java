@@ -21,9 +21,12 @@ package prt.theballgame;
  * #L%
  */
 
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -40,8 +43,10 @@ public class BallSettings {
     public  static  int radius = 20;
     public  static  int[] eredmeny = new int[2];
     public  static  boolean fulldisplay = false;
-    public  static  int Width = 750;//MainApp.Width;
-    public  static  int Height = 650;//MainApp.Height;
+    private static  final org.slf4j.Logger logger = LoggerFactory.getLogger(BallSettings.class);
+    private static  final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); 
+    public  static  int Width;   //750;//MainApp.Width; //-1920 -750
+    public  static  int Height;  //650;//MainApp.Height; //-1080 -650
 
     public static void setKorSzama(int KorSzama) {
         BallSettings.KorSzama = KorSzama;
@@ -98,6 +103,30 @@ public class BallSettings {
     public static boolean isFulldisplay() {
         return fulldisplay;
     }
+    public static int getWidth() {
+        if(!isFulldisplay()){
+        Width = 750;}
+        else{
+        Width = gd.getDisplayMode().getWidth();
+        }
+        logger.info(Width + "");
+        return Width;
+    }
+    public static int getHeight() {
+        if(!isFulldisplay()){
+        Height = 650;}
+        else{
+        Height = gd.getDisplayMode().getHeight();
+        }
+        logger.info(Height + "");
+        return Height;
+    }
+    public static void setWidth(int Width) {
+        BallSettings.Width = Width;
+    }
+    public static void setHeight(int Height) {
+        BallSettings.Height = Height;
+    }    
     public static String getColourName(Color becolor) {
         double piros = becolor.getRed();
         double zud = becolor.getGreen();

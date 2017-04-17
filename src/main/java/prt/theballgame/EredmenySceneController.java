@@ -94,7 +94,7 @@ public class EredmenySceneController implements Initializable {
            winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor()) + " játékos nyert");
         }
         if (BallSettings.getEredmeny() == 2 && BallSettings.isMultiplayer()) {
-           winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor()) + " játékos nyert");
+           winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor2()) + " játékos nyert");
         }
         if (BallSettings.getEredmeny() == 1 && !BallSettings.isMultiplayer()) {
            winnerlabel.setText("You");

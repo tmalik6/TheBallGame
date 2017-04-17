@@ -23,6 +23,7 @@ package prt.theballgame.Spawners;
  */
 
 import java.util.Random;
+import org.slf4j.LoggerFactory;
 import prt.theballgame.BallSettings;
 
 /**
@@ -38,9 +39,10 @@ public class Spawner {
     private static double YWay;
     Random rand = new Random();
 
-    public static final int WIDTH = BallSettings.Width;
-    public static final int HEIGHT = BallSettings.Height;
-    public static int radius = BallSettings.radius;
+    public static int WIDTH = BallSettings.getWidth();
+    public static int HEIGHT = BallSettings.getHeight();
+    public static int radius = BallSettings.getRadius();
+     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Spawner.class); 
     
     /**
      * 
@@ -55,6 +57,8 @@ public class Spawner {
         YWay = Math.sin(angle * Math.PI / 180);
         placeX = random(radius + 1, WIDTH - radius - 1);
         placeY = random(50 + radius + 1, HEIGHT - radius - 1);
+        logger.info(WIDTH + "");
+        logger.info(HEIGHT + "");
     }
 
     /**
@@ -119,5 +123,11 @@ public class Spawner {
         builder.append("Sebesség =");
         builder.append(speed);
         return builder.toString();
+    }
+    public static void checker(){
+        if(WIDTH != BallSettings.getWidth() || HEIGHT != BallSettings.getHeight() ){
+        WIDTH = BallSettings.getWidth();
+        HEIGHT = BallSettings.getHeight();
+        }
     }
 }
