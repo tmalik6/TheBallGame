@@ -52,6 +52,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     public void startButtonAction() {
+       GamesLauncher.game2();
     }
     
     @FXML
