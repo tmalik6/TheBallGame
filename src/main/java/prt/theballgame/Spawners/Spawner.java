@@ -42,7 +42,7 @@ public class Spawner {
     public static int WIDTH = BallSettings.getWidth();
     public static int HEIGHT = BallSettings.getHeight();
     public static int radius = BallSettings.getRadius();
-     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Spawner.class); 
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Spawner.class); 
     
     /**
      * 

@@ -43,38 +43,34 @@ import javafx.util.Duration;
 /**
  * Az Animációt és a háttérszámításokat végző osztály.
  */
-public class BallPane extends Pane {
+public class BallPane2 extends Pane {
 
     public   static  Timeline animation;    
     private  final   int[] eredmeny = new int[2];
     private  static  Color PredatorColor;
-    private  static  Color PredatorColor2;
     private  static  Color CirclesColor;
     private  boolean bounce = false;
     private  static  int KorSzama;
     private  final   org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
     private  static  int radius;    
     public   static   MovableCircle predator;
-    public   static   MovableCircle predator2;
     public            List<MovableCircle> circles;
+    
     /**
      *
      * Konstruktor, mely létrehoza a köröket, Pane-t és az Animációt.
      *
      */
-    public BallPane() {
+    public BallPane2() {
         Spawner.checker();
         KorSzama = BallSettings.getKorSzama();
         radius = BallSettings.getRadius();
         PredatorColor = BallSettings.getPredatorColor();
-        PredatorColor2 = BallSettings.getPredatorColor2();
         CirclesColor = BallSettings.getCirclesColor();
         predator = new MovableCircle(PredatorColor);
-        predator2 = new MovableCircle(PredatorColor2);
         circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(CirclesColor)).collect(Collectors.toList());
         getChildren().addAll(circles);
         getChildren().add(predator);
-        getChildren().add(predator2);
         logger.info("Körök elkészültek");
 
         //setWidth(SP.WIDTH);
@@ -90,7 +86,6 @@ public class BallPane extends Pane {
     private void moveBall() {
         circles.forEach(x -> x.moveBall(bounce));
         predator.moveBall(bounce);
-        predator2.moveBall(bounce);
         for (int i = 0; i < circles.size(); i++) {
             try {
                 bounce = false;
@@ -100,29 +95,16 @@ public class BallPane extends Pane {
                     eredmeny[0] = eredmeny[0] + 1;
                 }
 
-                if (dist2(circles.get(i).x, circles.get(i).y, predator2.x, predator2.y) <= (2 * radius)) {
-                    getChildren().remove(circles.get(i));
-                    circles.remove(i);
-                    eredmeny[1] = eredmeny[1] + 1;
-                }
                 if (circles.isEmpty()) {
                     animation.pause();
                     Move();
                 }
 
-                if (dist2(predator.x, predator.y, predator2.x, predator2.y) <= (2 * radius)) {
-                    bounce = true;
-                    predator.moveBall(bounce);
-                    predator2.moveBall(bounce);
-                    bounce = false;
-                }
                 for (int j = i + 1; j < circles.size(); j++) {
                     if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * radius + 2)) {
                         bounce = true;
                         circles.get(i).moveBall(bounce);
                         circles.get(j).moveBall(bounce);
-                        //String utkoz = "Utkozos történt:" + i + ".számú kör és" +j + ".számú kör között. Maradék körök száma:" + circles.size(); 
-                        //logger.info(utkoz); --> not vizsga any more, kivettem
                     }
                     bounce = false;
                 }
@@ -167,7 +149,7 @@ public class BallPane extends Pane {
     }
 
     /**
-     * Beállítja a játékos/ok körének új koordinátáit és vektorait.
+     * Beállítja a játékos körének új koordinátáit és vektorait.
      *
      * @param sign melyik irányba kell mozdulni a körnek {@code 1,2} abban az
      * esetben, ha függőlegesen változtason irányt {@code 3,4} abban az esetben,

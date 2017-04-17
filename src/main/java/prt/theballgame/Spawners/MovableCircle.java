@@ -32,7 +32,7 @@ import prt.theballgame.BallSettings;
  */
 public class MovableCircle extends Circle {
 
-    private Spawner SP = new Spawner();
+    private final Spawner SP = new Spawner();
     public  double x = Spawner.getPlaceX();
     public  double y = Spawner.getPlaceY();
     public  double dx = SP.getXWay(), dy = SP.getYWay();

@@ -35,6 +35,7 @@ import org.slf4j.LoggerFactory;
 public class BallSettings {
     public  static  ObservableList<String> datos = FXCollections.observableArrayList("RED", "BLUE", "YELLOW", "GREEN", "BLACK","BROWN", "GOLD","VIOLET","ORANGE","CHOCOLATE");
     public  static  ObservableList<String> igaz_hamis = FXCollections.observableArrayList("true", "false");
+    public  static  ObservableList<String> modok = FXCollections.observableArrayList("Sima", "Fordított");
     public  static  Color PredatorColor = Color.RED;
     public  static  Color PredatorColor2 = Color.YELLOW;
     public  static  Color CirclesColor = Color.GREEN;
@@ -47,7 +48,7 @@ public class BallSettings {
     private static  final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); 
     public  static  int Width;   //750;//MainApp.Width; //-1920 -750
     public  static  int Height;  //650;//MainApp.Height; //-1080 -650
-
+    
     public static void setKorSzama(int KorSzama) {
         BallSettings.KorSzama = KorSzama;
     }

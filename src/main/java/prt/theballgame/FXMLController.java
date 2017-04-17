@@ -52,7 +52,6 @@ public class FXMLController implements Initializable {
 
     @FXML
     public void startButtonAction() {
-       MainApp.getInstance().game();
     }
     
     @FXML

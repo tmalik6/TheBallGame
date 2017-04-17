@@ -172,7 +172,9 @@ public class OptionScheneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //korszam
         KorSzamLabel.setText(BallSettings.getKorSzama() + "");
+        //colors
         PredatorSzinLabel.setText(BallSettings.getColourName(BallSettings.getPredatorColor()) + "");
         Predator2SzinLabel.setText(BallSettings.getColourName(BallSettings.getPredatorColor2()) + "");
         CirclesSzinLabel.setText(BallSettings.getColourName(BallSettings.getCirclesColor()) + "");
@@ -182,14 +184,17 @@ public class OptionScheneController implements Initializable {
         PredatorColor.getSelectionModel().select(0);
         Predator2Color.getSelectionModel().select(2);
         CirclesColor.getSelectionModel().select(3);  
+        //multi
         SingleRadio.setToggleGroup(group);
         MultiRadio.setToggleGroup(group);
         if(!BallSettings.isMultiplayer())SingleRadio.setSelected(true);
         else MultiRadio.setSelected(true);
         SingleRadio.setUserData("Single");
         MultiRadio.setUserData("Multi");
+        //fulldisplay
         DisplayLabel.setText(BallSettings.isFulldisplay()+ "");
         DisplayChoice.setItems(BallSettings.igaz_hamis);
-        DisplayChoice.getSelectionModel().select(1);
+        if(!BallSettings.isFulldisplay())DisplayChoice.getSelectionModel().select(1);
+        else DisplayChoice.getSelectionModel().select(0);
     }   
 }
