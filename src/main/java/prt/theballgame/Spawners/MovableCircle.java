@@ -51,7 +51,16 @@ public class MovableCircle extends Circle {
         CheckDx(dx);
         CheckDy(dy);
     }
-
+    
+    public MovableCircle(Color color, int i) {
+        this.setCenterX(i);
+        this.setCenterY(i);
+        this.setRadius(radius);
+        this.setFill(color);
+        CheckDx(dx);
+        CheckDy(dy);
+    }
+    
     @SuppressWarnings("checkstyle:javadocmethod")
     private void CheckDx(double newDx) {
         while (newDx < -10 || newDx > 10) {

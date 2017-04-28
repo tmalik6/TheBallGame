@@ -189,15 +189,19 @@ public class BallPane extends Pane {
 
     public void instaend()
     {
-        for (int i = 0; i < circles.size(); i++) {
-            circles.remove(i);
-            getChildren().remove(i);
-        }
+        while( !circles.isEmpty())
+        {                 
+            for (int j = 0; j < circles.size(); j++) {
+            circles.remove(j);
+            getChildren().remove(j);
+            }                   
+        } 
         if (circles.isEmpty()){
             animation.pause();
             Move();
         }
     }
+    
     /**
      * Megállítja az Animációt.
      *

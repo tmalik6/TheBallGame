@@ -35,7 +35,6 @@ import org.slf4j.LoggerFactory;
 public class BallSettings {
     public  static  ObservableList<String> datos = FXCollections.observableArrayList("RED", "BLUE", "YELLOW", "GREEN", "BLACK","BROWN", "GOLD","VIOLET","ORANGE","CHOCOLATE");
     public  static  ObservableList<String> igaz_hamis = FXCollections.observableArrayList("true", "false");
-    public  static  ObservableList<String> modok = FXCollections.observableArrayList("Sima", "Fordított");
     public  static  Color PredatorColor = Color.RED;
     public  static  Color PredatorColor2 = Color.YELLOW;
     public  static  Color CirclesColor = Color.GREEN;
@@ -48,6 +47,8 @@ public class BallSettings {
     private static  final GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice(); 
     public  static  int Width;   //750;//MainApp.Width; //-1920 -750
     public  static  int Height;  //650;//MainApp.Height; //-1080 -650
+    public  static  int mod = 1;
+    public  static  int secoundspassed = 0;
     
     public static void setKorSzama(int KorSzama) {
         BallSettings.KorSzama = KorSzama;
@@ -110,7 +111,7 @@ public class BallSettings {
         else{
         Width = gd.getDisplayMode().getWidth();
         }
-        logger.info(Width + "");
+        //logger.info(Width + "");
         return Width;
     }
     public static int getHeight() {
@@ -119,7 +120,7 @@ public class BallSettings {
         else{
         Height = gd.getDisplayMode().getHeight();
         }
-        logger.info(Height + "");
+        //logger.info(Height + "");
         return Height;
     }
     public static void setWidth(int Width) {
@@ -127,6 +128,12 @@ public class BallSettings {
     }
     public static void setHeight(int Height) {
         BallSettings.Height = Height;
+    }
+    public static int getMod() {
+        return mod;
+    }
+    public static void setMod(int mod) {
+        BallSettings.mod = mod;
     }    
     public static String getColourName(Color becolor) {
         double piros = becolor.getRed();

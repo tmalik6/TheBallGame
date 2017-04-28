@@ -45,22 +45,25 @@ public class EredmenySceneController implements Initializable {
 
     @FXML
     private javafx.scene.control.Button exitbutton;
-    
+
     @FXML
     private javafx.scene.control.Button backbutton;
-    
+
     @FXML
     private javafx.scene.control.Button eredmeny;
-    
+
     @FXML
     private Label winnerlabel;
-    
+
+    @FXML
+    private Label winnerfinder;
+
     @FXML
     private void exitButtonAction() {
         Stage stage = (Stage) exitbutton.getScene().getWindow();
         stage.close();
     }
-    
+
     @FXML
     private void backButtonAction(ActionEvent event) {
         Stage stage;
@@ -68,8 +71,8 @@ public class EredmenySceneController implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
-            root = loader.load(); 
-            
+            root = loader.load();
+
             stage = (Stage) backbutton.getScene().getWindow();
             Scene scene = new Scene(root);
             scene.getStylesheets().add("/styles/Styles.css");
@@ -80,27 +83,35 @@ public class EredmenySceneController implements Initializable {
             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     @FXML
     private void showeredmeny(ActionEvent event) {
-        if (BallSettings.getEredmeny() == 0) {
-           winnerlabel.setText("Equal  :|"); 
+        if (BallSettings.getMod() == 1) {
+            winnerfinder.setText("Congratulation. The Winner is:");
+            if (BallSettings.getEredmeny() == 0) {
+                winnerlabel.setText("Equal  :|");
+            }
+            if (BallSettings.getEredmeny() == 1 && BallSettings.isMultiplayer()) {
+                winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor()) + " játékos nyert");
+            }
+            if (BallSettings.getEredmeny() == 2 && BallSettings.isMultiplayer()) {
+                winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor2()) + " játékos nyert");
+            }
+            if (BallSettings.getEredmeny() == 1 && !BallSettings.isMultiplayer()) {
+                winnerlabel.setText("You");
+            }
+            if (BallSettings.getEredmeny() == 2 && !BallSettings.isMultiplayer()) {
+                winnerlabel.setText("The Computer");
+            }
         }
-        if (BallSettings.getEredmeny() == 1 && BallSettings.isMultiplayer()) {
-           winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor()) + " játékos nyert");
+        else{
+            winnerfinder.setText("Your survived this long:");
+            winnerlabel.setText(BallSettings.secoundspassed + " second(s)");            
         }
-        if (BallSettings.getEredmeny() == 2 && BallSettings.isMultiplayer()) {
-           winnerlabel.setText("A " + BallSettings.getColourName(BallSettings.getPredatorColor2()) + " játékos nyert");
-        }
-        if (BallSettings.getEredmeny() == 1 && !BallSettings.isMultiplayer()) {
-           winnerlabel.setText("You");
-        }
-        if (BallSettings.getEredmeny() == 2 && !BallSettings.isMultiplayer()) {
-           winnerlabel.setText("The Computer");
-        }
-    }    
+    }
 }

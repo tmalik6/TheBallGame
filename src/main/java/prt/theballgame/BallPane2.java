@@ -23,6 +23,7 @@ package prt.theballgame;
  */
 
 import prt.theballgame.Spawners.*;
+import prt.theballgame.TimerScheduler;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,8 +54,9 @@ public class BallPane2 extends Pane {
     private  static  int KorSzama;
     private  final   org.slf4j.Logger logger = LoggerFactory.getLogger(BallPane.class);
     private  static  int radius;    
-    public   static   MovableCircle predator;
-    public            List<MovableCircle> circles;
+    public   static  MovableCircle predator;
+    public           List<MovableCircle> circles;    
+    TimerScheduler scTimer = new TimerScheduler();
     
     /**
      *
@@ -62,44 +64,54 @@ public class BallPane2 extends Pane {
      *
      */
     public BallPane2() {
+        scTimer.restart();
+        scTimer.start();
         Spawner.checker();
         KorSzama = BallSettings.getKorSzama();
         radius = BallSettings.getRadius();
         PredatorColor = BallSettings.getPredatorColor();
         CirclesColor = BallSettings.getCirclesColor();
-        predator = new MovableCircle(PredatorColor);
+        predator = new MovableCircle(PredatorColor,0);
         circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(CirclesColor)).collect(Collectors.toList());
         getChildren().addAll(circles);
         getChildren().add(predator);
         logger.info("Körök elkészültek");
-
-        //setWidth(SP.WIDTH);
-        //setHeight(SP.HEIGHT);
-
         animation = new Timeline(new KeyFrame(Duration.millis(7), e -> moveBall()));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
-
+        logger.info(predator.getCenterX() + "");
+        logger.info(predator.getCenterY() + "");
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
     private void moveBall() {
+        //animation.pause();
+        //logger.info("X:1" + predator.getCenterX() + "");
+        //logger.info("Y:1" + predator.getCenterY() + "");
         circles.forEach(x -> x.moveBall(bounce));
         predator.moveBall(bounce);
         for (int i = 0; i < circles.size(); i++) {
             try {
                 bounce = false;
                 if (dist2(circles.get(i).x, circles.get(i).y, predator.x, predator.y) <= (2 * radius)) {
-                    getChildren().remove(circles.get(i));
-                    circles.remove(i);
+                    while( !circles.isEmpty())
+                    {                 
+                        for (int j = 0; j < circles.size(); j++) {
+                        circles.remove(j);
+                        getChildren().remove(j);
+                        }                   
+                    }                    
+                    if (circles.isEmpty()){
+                    animation.pause();                    
+                    scTimer.end();
+                    Move();
+                    }
                     eredmeny[0] = eredmeny[0] + 1;
                 }
-
                 if (circles.isEmpty()) {
                     animation.pause();
                     Move();
                 }
-
                 for (int j = i + 1; j < circles.size(); j++) {
                     if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * radius + 2)) {
                         bounce = true;
@@ -116,7 +128,6 @@ public class BallPane2 extends Pane {
                 }
             }
         }
-
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
@@ -171,12 +182,16 @@ public class BallPane2 extends Pane {
 
     public void instaend()
     {
-        for (int i = 0; i < circles.size(); i++) {
-            circles.remove(i);
-            getChildren().remove(i);
-        }
+        while( !circles.isEmpty())
+        {                 
+            for (int j = 0; j < circles.size(); j++) {
+            circles.remove(j);
+            getChildren().remove(j);
+            }                   
+        } 
         if (circles.isEmpty()){
             animation.pause();
+            scTimer.end();
             Move();
         }
     }

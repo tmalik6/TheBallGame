@@ -52,7 +52,12 @@ public class FXMLController implements Initializable {
 
     @FXML
     public void startButtonAction() {
-       GamesLauncher.game2();
+        if(BallSettings.getMod() == 1){
+        GamesLauncher.game();
+        }
+        else{
+            GamesLauncher.game2();
+        }
     }
     
     @FXML

@@ -57,8 +57,8 @@ public class Spawner {
         YWay = Math.sin(angle * Math.PI / 180);
         placeX = random(radius + 1, WIDTH - radius - 1);
         placeY = random(50 + radius + 1, HEIGHT - radius - 1);
-        logger.info(WIDTH + "");
-        logger.info(HEIGHT + "");
+        //logger.info(WIDTH + "");
+        //logger.info(HEIGHT + "");
     }
 
     /**

@@ -78,6 +78,12 @@ public class OptionScheneController implements Initializable {
     private RadioButton MultiRadio;  
 
     @FXML
+    private RadioButton NormalRadio;
+    
+    @FXML
+    private RadioButton ReverseRadio;  
+    
+    @FXML
     private javafx.scene.control.Button SaveButton;
 
     @FXML
@@ -99,6 +105,8 @@ public class OptionScheneController implements Initializable {
     private ChoiceBox DisplayChoice;
     
     private final ToggleGroup group = new ToggleGroup();
+    
+    private final ToggleGroup modegroup = new ToggleGroup();
 
     @FXML
     private void SaveButtonAction() {
@@ -119,6 +127,12 @@ public class OptionScheneController implements Initializable {
         }
         else{
             BallSettings.setMultiplayer(false);
+        }
+        if(modegroup.getSelectedToggle().getUserData().toString().equals("Reverse")){
+            BallSettings.setMod(2);
+        }
+        else{
+            BallSettings.setMod(1);
         }
         //predator
         if(mehet){
@@ -181,9 +195,27 @@ public class OptionScheneController implements Initializable {
         PredatorColor.setItems(BallSettings.datos);
         Predator2Color.setItems(BallSettings.datos);
         CirclesColor.setItems(BallSettings.datos);
-        PredatorColor.getSelectionModel().select(0);
-        Predator2Color.getSelectionModel().select(2);
-        CirclesColor.getSelectionModel().select(3);  
+        Valasztott = BallSettings.getColourName(BallSettings.getPredatorColor());
+        for (int i = 0; i < BallSettings.datos.size(); i++) {
+            if(Valasztott.equals(BallSettings.datos.get(i)))
+            {
+                PredatorColor.getSelectionModel().select(i);
+            }
+        }
+        Valasztott = BallSettings.getColourName(BallSettings.getPredatorColor2());
+        for (int i = 0; i < BallSettings.datos.size(); i++) {
+            if(Valasztott.equals(BallSettings.datos.get(i)))
+            {
+                Predator2Color.getSelectionModel().select(i);
+            }
+        }
+        Valasztott = BallSettings.getColourName(BallSettings.getCirclesColor());
+        for (int i = 0; i < BallSettings.datos.size(); i++) {
+            if(Valasztott.equals(BallSettings.datos.get(i)))
+            {
+                CirclesColor.getSelectionModel().select(i); 
+            }
+        }
         //multi
         SingleRadio.setToggleGroup(group);
         MultiRadio.setToggleGroup(group);
@@ -191,6 +223,13 @@ public class OptionScheneController implements Initializable {
         else MultiRadio.setSelected(true);
         SingleRadio.setUserData("Single");
         MultiRadio.setUserData("Multi");
+        //mods
+        NormalRadio.setToggleGroup(modegroup);
+        ReverseRadio.setToggleGroup(modegroup);
+        if(BallSettings.getMod() == 1)NormalRadio.setSelected(true);
+        else ReverseRadio.setSelected(true);
+        NormalRadio.setUserData("Normal");
+        ReverseRadio.setUserData("Reverse");
         //fulldisplay
         DisplayLabel.setText(BallSettings.isFulldisplay()+ "");
         DisplayChoice.setItems(BallSettings.igaz_hamis);

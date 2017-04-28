@@ -14,7 +14,7 @@
         <URL value="@/styles/Styles.css" />
     </stylesheets>
    <children>
-      <Label layoutX="45.0" layoutY="113.0" prefHeight="74.0" prefWidth="188.0" text="Congratulation. The Winner is:" wrapText="true" />
+      <Label fx:id="winnerfinder" layoutX="45.0" layoutY="113.0" prefHeight="74.0" prefWidth="188.0" wrapText="true" />
       <Label fx:id="winnerlabel" layoutX="50.0" layoutY="201.0" prefHeight="74.0" prefWidth="178.0" />
       <Label layoutX="364.0" layoutY="51.0" prefHeight="65.0" prefWidth="199.0" text="What do want to do?" />
       <Button fx:id="backbutton" layoutX="353.0" layoutY="150.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="52.0" prefWidth="199.0" text="Start a New Game!" />
