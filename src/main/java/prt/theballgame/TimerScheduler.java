@@ -35,7 +35,6 @@ public class TimerScheduler {
         @Override       
         public void run() {
             BallSettings.secoundspassed++;
-            System.out.println("Secionbd: "+BallSettings.secoundspassed);
         }
     }; 
     public void start(){

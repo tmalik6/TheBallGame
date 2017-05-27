@@ -102,7 +102,8 @@ public class GamesLauncher {
         Mainstage.show();        
     }
     public static void game2() {
-        BallPane2 BP2 = new BallPane2();
+        int k = 0;
+        BallPane BP2 = new BallPane(k);
         final Group group = new Group(createInstructions(), BP2);
         Scene scene;
         if (!BallSettings.isFulldisplay()) {
@@ -113,16 +114,16 @@ public class GamesLauncher {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if (key.getCode() == KeyCode.UP) {
                 int sign = 1;
-                BP2.controllBall(sign, BallPane2.predator);
+                BP2.controllBall(sign, BallPane.predator);
             } else if (key.getCode() == KeyCode.DOWN) {
                 int sign = 2;
-                BP2.controllBall(sign, BallPane2.predator);
+                BP2.controllBall(sign, BallPane.predator);
             } else if (key.getCode() == KeyCode.LEFT) {
                 int sign = 3;
-                BP2.controllBall(sign, BallPane2.predator);
+                BP2.controllBall(sign, BallPane.predator);
             } else if (key.getCode() == KeyCode.RIGHT) {
                 int sign = 4;
-                BP2.controllBall(sign, BallPane2.predator);
+                BP2.controllBall(sign, BallPane.predator);
             } else if (key.getCode() == KeyCode.Z) {
                 BP2.instaend();
             } else if (key.getCode() == KeyCode.P) {

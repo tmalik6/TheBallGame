@@ -122,40 +122,40 @@ public class OptionScheneController implements Initializable {
             }
             KorSzamLabel.setText(BallSettings.getKorSzama() + "");
         }        
-        if(group.getSelectedToggle().getUserData().toString().equals("Multi")){
-            BallSettings.setMultiplayer(true);
-        }
-        else{
-            BallSettings.setMultiplayer(false);
-        }
-        if(modegroup.getSelectedToggle().getUserData().toString().equals("Reverse")){
-            BallSettings.setMod(2);
-        }
-        else{
-            BallSettings.setMod(1);
-        }
         //predator
         if(mehet){
-        Valasztott = (String) PredatorColor.getValue();
-        ColorChange = Color.valueOf(Valasztott);
-        PredatorSzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
-        BallSettings.setPredatorColor(ColorChange);
-        //predator2
-        Valasztott = (String) Predator2Color.getValue();
-        ColorChange = Color.valueOf(Valasztott);
-        Predator2SzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
-        BallSettings.setPredatorColor2(ColorChange);
-        //circles
-        Valasztott = (String) CirclesColor.getValue();
-        ColorChange = Color.valueOf(Valasztott);
-        CirclesSzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
-        BallSettings.setCirclesColor(ColorChange);
-        //display 
-        Valasztott = (String) DisplayChoice.getValue();
-        Boolean b = Boolean.valueOf(Valasztott);
-        BallSettings.setFulldisplay(b);        
-        DisplayLabel.setText(BallSettings.isFulldisplay()+ "");
-        HibaLabel.setText("Mentve");        
+            Valasztott = (String) PredatorColor.getValue();
+            ColorChange = Color.valueOf(Valasztott);
+            PredatorSzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
+            BallSettings.setPredatorColor(ColorChange);
+            //predator2
+            Valasztott = (String) Predator2Color.getValue();
+            ColorChange = Color.valueOf(Valasztott);
+            Predator2SzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
+            BallSettings.setPredatorColor2(ColorChange);
+            //circles
+            Valasztott = (String) CirclesColor.getValue();
+            ColorChange = Color.valueOf(Valasztott);
+            CirclesSzinLabel.setText(BallSettings.getColourName(ColorChange) + "");
+            BallSettings.setCirclesColor(ColorChange);
+            //display 
+            Valasztott = (String) DisplayChoice.getValue();
+            Boolean b = Boolean.valueOf(Valasztott);
+            BallSettings.setFulldisplay(b);        
+            DisplayLabel.setText(BallSettings.isFulldisplay()+ "");
+            //multi
+            if (group.getSelectedToggle().getUserData().toString().equals("Multi")) {
+                    BallSettings.setMultiplayer(true);
+            } else {
+                    BallSettings.setMultiplayer(false);
+            }
+            //mode
+            if (modegroup.getSelectedToggle().getUserData().toString().equals("Reverse")) {
+                    BallSettings.setMod(2);
+            } else {
+                    BallSettings.setMod(1);
+            }
+            HibaLabel.setText("Mentve");        
         }
         mehet = true;
     }

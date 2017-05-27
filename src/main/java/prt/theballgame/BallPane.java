@@ -57,6 +57,7 @@ public class BallPane extends Pane {
     public   static   MovableCircle predator;
     public   static   MovableCircle predator2;
     public            List<MovableCircle> circles;
+    TimerScheduler scTimer = new TimerScheduler();
     /**
      *
      * Konstruktor, mely létrehoza a köröket, Pane-t és az Animációt.
@@ -77,13 +78,30 @@ public class BallPane extends Pane {
         getChildren().add(predator2);
         logger.info("Körök elkészültek");
 
-        //setWidth(SP.WIDTH);
-        //setHeight(SP.HEIGHT);
-
         animation = new Timeline(new KeyFrame(Duration.millis(7), e -> moveBall()));
         animation.setCycleCount(Timeline.INDEFINITE);
         animation.play();
 
+    }
+    
+    public BallPane(int k) {
+        scTimer.restart();
+        scTimer.start();
+        Spawner.checker();
+        KorSzama = BallSettings.getKorSzama();
+        radius = BallSettings.getRadius();
+        PredatorColor = BallSettings.getPredatorColor();
+        CirclesColor = BallSettings.getCirclesColor();
+        predator = new MovableCircle(PredatorColor,0);
+        circles = IntStream.range(0, KorSzama).mapToObj(i -> new MovableCircle(CirclesColor)).collect(Collectors.toList());
+        getChildren().addAll(circles);
+        getChildren().add(predator);
+        logger.info("Körök elkészültek");
+        animation = new Timeline(new KeyFrame(Duration.millis(7), e -> moveBall_2()));
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.play();
+        logger.info(predator.getCenterX() + "");
+        logger.info(predator.getCenterY() + "");
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
@@ -135,6 +153,54 @@ public class BallPane extends Pane {
             }
         }
 
+    }
+    
+    @SuppressWarnings("checkstyle:javadocmethod")
+    private void moveBall_2() {
+        //animation.pause();
+        //logger.info("X:" + predator.getCenterX() + "");
+        //logger.info("Y:" + predator.getCenterY() + "");
+        circles.forEach(x -> x.moveBall(bounce));
+        predator.moveBall(bounce);
+        for (int i = 0; i < circles.size(); i++) {
+            try {
+                bounce = false;
+                if (dist2(circles.get(i).x, circles.get(i).y, predator.x, predator.y) <= (2 * radius)) {
+                    while( !circles.isEmpty())
+                    {                 
+                        for (int j = 0; j < circles.size(); j++) {
+                        circles.remove(j);
+                        getChildren().remove(j);
+                        }                   
+                    }                    
+                    if (circles.isEmpty()){
+                    animation.pause();                    
+                    scTimer.end();
+                    Move();
+                    }
+                    eredmeny[0] = eredmeny[0] + 1;
+                }
+                if (circles.isEmpty()) {
+                    scTimer.end();
+                    animation.pause();
+                    Move();
+                }
+                for (int j = i + 1; j < circles.size(); j++) {
+                    if (dist2(circles.get(i).x, circles.get(i).y, circles.get(j).x, circles.get(j).y) <= (2 * radius + 2)) {
+                        bounce = true;
+                        circles.get(i).moveBall(bounce);
+                        circles.get(j).moveBall(bounce);
+                    }
+                    bounce = false;
+                }
+            } catch (IndexOutOfBoundsException | NullPointerException in) {
+                logger.info("unexpected");
+                if (circles.isEmpty()) {
+                    animation.pause();
+                    Move();
+                }
+            }
+        }
     }
 
     @SuppressWarnings("checkstyle:javadocmethod")
@@ -198,6 +264,10 @@ public class BallPane extends Pane {
         } 
         if (circles.isEmpty()){
             animation.pause();
+            if(BallSettings.getMod() == 2)
+            {   
+                scTimer.end();
+            }
             Move();
         }
     }

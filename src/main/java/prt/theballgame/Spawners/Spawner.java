@@ -57,8 +57,8 @@ public class Spawner {
         YWay = Math.sin(angle * Math.PI / 180);
         placeX = random(radius + 1, WIDTH - radius - 1);
         placeY = random(50 + radius + 1, HEIGHT - radius - 1);
-        //logger.info(WIDTH + "");
-        //logger.info(HEIGHT + "");
+        //logger.info(XWay + "");
+        //logger.info(YWay + "");
     }
 
     /**
@@ -112,6 +112,13 @@ public class Spawner {
         return rand.nextInt(high);
     }
 
+     public static void checker(){
+        if(WIDTH != BallSettings.getWidth() || HEIGHT != BallSettings.getHeight() ){
+        WIDTH = BallSettings.getWidth();
+        HEIGHT = BallSettings.getHeight();
+        }
+    }
+     
     @SuppressWarnings("checkstyle:javadocmethod")
     @Override
     public String toString() {
@@ -123,11 +130,5 @@ public class Spawner {
         builder.append("Sebesség =");
         builder.append(speed);
         return builder.toString();
-    }
-    public static void checker(){
-        if(WIDTH != BallSettings.getWidth() || HEIGHT != BallSettings.getHeight() ){
-        WIDTH = BallSettings.getWidth();
-        HEIGHT = BallSettings.getHeight();
-        }
     }
 }
