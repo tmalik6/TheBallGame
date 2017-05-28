@@ -64,6 +64,8 @@ public class EredmenySceneController implements Initializable {
     
     @FXML
     private Label YourscoreLabel;    
+    
+    private GameXML gx = new GameXML();
 
     @FXML
     private void exitButtonAction() {
@@ -119,8 +121,8 @@ public class EredmenySceneController implements Initializable {
         }
         else{
             winnerfinder.setText("Your survived this long:");
-            winnerlabel.setText(BallSettings.secoundspassed + " second(s)");            
-            GameXML.Save();
+            winnerlabel.setText(BallSettings.secoundspassed + " second(s)");
+            gx.Save();
             String yourscore = "Your Score: " + BallSettings.pontszam(GameXML.KorokSzama, GameXML.ido, GameXML.fulldisplay) + "";
             String bestscore = "Best Score: " + BallSettings.pontszam(GameXML.Kormentes, GameXML.idomentes, GameXML.fulldisplaymentes) + "";
             YourscoreLabel.setText(yourscore);
