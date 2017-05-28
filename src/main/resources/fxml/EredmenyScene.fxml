@@ -14,11 +14,13 @@
         <URL value="@/styles/Styles.css" />
     </stylesheets>
    <children>
-      <Label fx:id="winnerfinder" layoutX="45.0" layoutY="113.0" prefHeight="74.0" prefWidth="188.0" wrapText="true" />
-      <Label fx:id="winnerlabel" layoutX="50.0" layoutY="201.0" prefHeight="74.0" prefWidth="178.0" />
+      <Label fx:id="winnerfinder" layoutX="45.0" layoutY="84.0" prefHeight="74.0" prefWidth="188.0" wrapText="true" />
+      <Label fx:id="winnerlabel" layoutX="50.0" layoutY="163.0" prefHeight="74.0" prefWidth="178.0" />
       <Label layoutX="364.0" layoutY="51.0" prefHeight="65.0" prefWidth="199.0" text="What do want to do?" />
       <Button fx:id="backbutton" layoutX="353.0" layoutY="150.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="52.0" prefWidth="199.0" text="Start a New Game!" />
       <Button fx:id="exitbutton" layoutX="353.0" layoutY="244.0" mnemonicParsing="false" onAction="#exitButtonAction" prefHeight="52.0" prefWidth="199.0" text="Exit!" />
       <Button fx:id="eredmeny" layoutX="40.0" layoutY="25.0" mnemonicParsing="false" onAction="#showeredmeny" prefHeight="52.0" prefWidth="188.0" text="Show The Result!" />
+      <Label fx:id="YourscoreLabel" layoutX="14.0" layoutY="244.0" prefHeight="52.0" prefWidth="160.0" />
+      <Label fx:id="BestScoreLabel" layoutX="14.0" layoutY="296.0" prefHeight="52.0" prefWidth="160.0" />
    </children>
 </AnchorPane>

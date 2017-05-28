@@ -35,6 +35,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javax.xml.transform.TransformerException;
 
 /**
  * FXML Controller class
@@ -57,11 +58,18 @@ public class EredmenySceneController implements Initializable {
 
     @FXML
     private Label winnerfinder;
+    
+    @FXML
+    private Label BestScoreLabel;
+    
+    @FXML
+    private Label YourscoreLabel;    
 
     @FXML
     private void exitButtonAction() {
         Stage stage = (Stage) exitbutton.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
     @FXML
@@ -90,7 +98,7 @@ public class EredmenySceneController implements Initializable {
     }
 
     @FXML
-    private void showeredmeny(ActionEvent event) {
+    private void showeredmeny(ActionEvent event) throws TransformerException {
         if (BallSettings.getMod() == 1) {
             winnerfinder.setText("Congratulation. The Winner is:");
             if (BallSettings.getEredmeny() == 0) {
@@ -112,6 +120,11 @@ public class EredmenySceneController implements Initializable {
         else{
             winnerfinder.setText("Your survived this long:");
             winnerlabel.setText(BallSettings.secoundspassed + " second(s)");            
-        }
+            GameXML.Save();
+            String yourscore = "Your Score: " + BallSettings.pontszam(GameXML.KorokSzama, GameXML.ido, GameXML.fulldisplay) + "";
+            String bestscore = "Best Score: " + BallSettings.pontszam(GameXML.Kormentes, GameXML.idomentes, GameXML.fulldisplaymentes) + "";
+            YourscoreLabel.setText(yourscore);
+            BestScoreLabel.setText(bestscore);
+        }        
     }
 }

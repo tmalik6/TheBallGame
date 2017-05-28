@@ -28,7 +28,7 @@ public class BallPaneTest {
     private final MovableCircle mv = new MovableCircle(Color.GREEN);
     
     @Test
-    public void testdist2_1() {
+    public void testcontroll_1() {
         double result = mv.dy;
         BP.controllBall(1, mv);
         mv.controllBall(1);
@@ -36,7 +36,7 @@ public class BallPaneTest {
         assertEquals(expResult, result,0.0);
     }
     @Test
-    public void testdist2_2() {
+    public void testcontroll_2() {
         double result = mv.dy;
         BP.controllBall(2, mv);
         mv.controllBall(2);
@@ -44,7 +44,7 @@ public class BallPaneTest {
         assertEquals(expResult, result,0.0);
     }
     @Test
-    public void testdist2_3() {
+    public void testcontroll_3() {
         double result = mv.dx;
         BP.controllBall(3, mv);
         mv.controllBall(3);
@@ -52,7 +52,7 @@ public class BallPaneTest {
         assertEquals(expResult, result,0.0);
     }
     @Test
-    public void testdist2_4() {
+    public void testcontroll_4() {
         double result = mv.dx;
         BP.controllBall(4, mv);
         mv.controllBall(4);

@@ -134,7 +134,10 @@ public class BallSettings {
     }
     public static void setMod(int mod) {
         BallSettings.mod = mod;
-    }    
+    }
+    public static int getSecoundspassed() {
+        return secoundspassed;
+    } 
     public static String getColourName(Color becolor) {
         double piros = becolor.getRed();
         double zud = becolor.getGreen();
@@ -171,5 +174,13 @@ public class BallSettings {
             return "ORANGE";
         }
         return null;
+    }
+    public static int pontszam(int kor, int time, boolean fulldisplay) {
+        if(!fulldisplay){
+            return kor*time;
+        }
+        else{
+            return kor*time*(6/4);
+        }
     }
 }

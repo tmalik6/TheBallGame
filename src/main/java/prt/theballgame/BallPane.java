@@ -106,6 +106,7 @@ public class BallPane extends Pane {
 
     @SuppressWarnings("checkstyle:javadocmethod")
     private void moveBall() {
+        GamesLauncher.Mainstage.setOnCloseRequest(e ->  System.exit(0));
         circles.forEach(x -> x.moveBall(bounce));
         predator.moveBall(bounce);
         predator2.moveBall(bounce);
@@ -157,6 +158,7 @@ public class BallPane extends Pane {
     
     @SuppressWarnings("checkstyle:javadocmethod")
     private void moveBall_2() {
+        GamesLauncher.Mainstage.setOnCloseRequest(e ->  System.exit(0));
         //animation.pause();
         //logger.info("X:" + predator.getCenterX() + "");
         //logger.info("Y:" + predator.getCenterY() + "");
